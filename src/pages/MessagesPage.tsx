@@ -129,76 +129,132 @@ export function MessagesPage() {
   }
 
   return (
-    <div className="flex h-[calc(100vh-4rem)]"> {/* Assuming 4rem navbar height */} 
+    <div className="flex h-[calc(100vh-4rem)]">
+      {' '}
+      {/* Assuming 4rem navbar height */}
       {/* Sidebar for Conversations List */}
       <div className="w-1/3 border-r border-gray-200 bg-gray-50 flex flex-col">
         <div className="p-4 border-b">
           <h2 className="text-xl font-semibold">Chats</h2>
           <div className="relative mt-2">
-            <Input 
-              type="text" 
-              placeholder="Search users..." 
+            <Input
+              type="text"
+              placeholder="Search users..."
               className="pl-10 w-full"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 size-4 text-gray-400" />
           </div>
         </div>
         <div className="overflow-y-auto flex-grow">
-          {filteredConversations.length > 0 ? filteredConversations.map(convo => (
-            <Link 
-                to={`/messages/${convo.id}`} 
-                key={convo.id} 
+          {filteredConversations.length > 0 ? (
+            filteredConversations.map((convo) => (
+              <Link
+                to={`/messages/${convo.id}`}
+                key={convo.id}
                 onClick={() => setActiveConversation(convo)}
-                className={`block p-4 hover:bg-gray-100 border-b border-gray-200 ${activeConversation?.id === convo.id ? 'bg-blue-50 border-l-4 border-blue-500' : ''}`}
-            >
-              <div className="flex items-center">
-                <Avatar className="h-10 w-10 mr-3">
-                    <AvatarImage src={convo.otherUser.avatar} alt={convo.otherUser.name} />
-                    <AvatarFallback>{convo.otherUser.name.substring(0,1).toUpperCase()}</AvatarFallback>
-                </Avatar>
-                <div className="flex-grow truncate">
-                  <div className="flex justify-between items-center">
-                    <h3 className="font-semibold text-sm truncate">{convo.otherUser.name}</h3>
-                    {convo.unreadCount > 0 && 
+                className={`block p-4 hover:bg-gray-100 border-b border-gray-200 ${
+                  activeConversation?.id === convo.id
+                    ? 'bg-blue-50 border-l-4 border-blue-500'
+                    : ''
+                }`}
+              >
+                <div className="flex items-center">
+                  <Avatar className="size-10 mr-3">
+                    <AvatarImage
+                      src={convo.otherUser.avatar}
+                      alt={convo.otherUser.name}
+                    />
+                    <AvatarFallback>
+                      {convo.otherUser.name.substring(0, 1).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-grow truncate">
+                    <div className="flex justify-between items-center">
+                      <h3 className="font-semibold text-sm truncate">
+                        {convo.otherUser.name}
+                      </h3>
+                      {convo.unreadCount > 0 && (
                         <span className="bg-blue-500 text-white text-xs rounded-full px-1.5 py-0.5 font-semibold">
-                            {convo.unreadCount}
+                          {convo.unreadCount}
                         </span>
-                    }
+                      )}
+                    </div>
+                    <p
+                      className={`text-xs truncate ${
+                        convo.unreadCount > 0
+                          ? 'text-gray-800 font-medium'
+                          : 'text-gray-500'
+                      }`}
+                    >
+                      {convo.lastMessage.content}
+                    </p>
                   </div>
-                  <p className={`text-xs truncate ${convo.unreadCount > 0 ? 'text-gray-800 font-medium' : 'text-gray-500'}`}>{convo.lastMessage.content}</p>
                 </div>
-              </div>
-            </Link>
-          )) : (
-            <p className="p-4 text-sm text-gray-500 text-center">No conversations found.</p>
+              </Link>
+            ))
+          ) : (
+            <p className="p-4 text-sm text-gray-500 text-center">
+              No conversations found.
+            </p>
           )}
         </div>
       </div>
-
       {/* Main Chat Area */}
       <div className="w-2/3 flex flex-col bg-white">
         {activeConversation ? (
           <>
             <div className="p-4 border-b border-gray-200 flex items-center">
-                <Avatar className="h-10 w-10 mr-3">
-                    <AvatarImage src={activeConversation.otherUser.avatar} alt={activeConversation.otherUser.name} />
-                    <AvatarFallback>{activeConversation.otherUser.name.substring(0,1).toUpperCase()}</AvatarFallback>
-                </Avatar>
-                <div>
-                    <h3 className="font-semibold text-lg">{activeConversation.otherUser.name}</h3>
-                    <p className="text-xs text-green-500">Online</p> {/* Placeholder status */} 
-                </div>
+              <Avatar className="size-10 mr-3">
+                <AvatarImage
+                  src={activeConversation.otherUser.avatar}
+                  alt={activeConversation.otherUser.name}
+                />
+                <AvatarFallback>
+                  {activeConversation.otherUser.name
+                    .substring(0, 1)
+                    .toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+              <div>
+                <h3 className="font-semibold text-lg">
+                  {activeConversation.otherUser.name}
+                </h3>
+                <p className="text-xs text-green-500">Online</p>{' '}
+                {/* Placeholder status */}
+              </div>
             </div>
-            
+
             <div className="flex-grow overflow-y-auto p-6 space-y-4 bg-gray-50">
-              {messages.map(msg => (
-                <div key={msg.id} className={`flex ${msg.senderId === authUser.id ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-xs lg:max-w-md px-4 py-2 rounded-xl ${msg.senderId === authUser.id ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}>
+              {messages.map((msg) => (
+                <div
+                  key={msg.id}
+                  className={`flex ${
+                    msg.senderId === authUser.id
+                      ? 'justify-end'
+                      : 'justify-start'
+                  }`}
+                >
+                  <div
+                    className={`max-w-xs lg:max-w-md px-4 py-2 rounded-xl ${
+                      msg.senderId === authUser.id
+                        ? 'bg-blue-500 text-white'
+                        : 'bg-gray-200 text-gray-800'
+                    }`}
+                  >
                     <p className="text-sm">{msg.content}</p>
-                    <p className={`text-xs mt-1 ${msg.senderId === authUser.id ? 'text-blue-200' : 'text-gray-500'} text-right`}>
-                        {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    <p
+                      className={`text-xs mt-1 ${
+                        msg.senderId === authUser.id
+                          ? 'text-blue-200'
+                          : 'text-gray-500'
+                      } text-right`}
+                    >
+                      {new Date(msg.timestamp).toLocaleTimeString([], {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
                     </p>
                   </div>
                 </div>
@@ -207,16 +263,22 @@ export function MessagesPage() {
             </div>
 
             <div className="p-4 border-t border-gray-200 bg-white">
-              <form onSubmit={(e) => { e.preventDefault(); handleSendMessage(); }} className="flex items-center space-x-3">
-                <Input 
-                  type="text" 
-                  placeholder="Type a message..." 
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  handleSendMessage()
+                }}
+                className="flex items-center space-x-3"
+              >
+                <Input
+                  type="text"
+                  placeholder="Type a message..."
                   className="flex-grow"
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                 />
                 <Button type="submit" disabled={!newMessage.trim()}>
-                  <Send className="h-5 w-5" /> 
+                  <Send className="size-5" />
                   <span className="ml-2 hidden sm:inline">Send</span>
                 </Button>
               </form>
@@ -226,10 +288,12 @@ export function MessagesPage() {
           <div className="flex-grow flex flex-col items-center justify-center text-gray-500 bg-gray-50">
             <CornerDownLeft className="h-16 w-16 mb-4 text-gray-300" />
             <h2 className="text-xl font-semibold">Select a conversation</h2>
-            <p className="text-sm">Choose a user from the list to start chatting.</p>
+            <p className="text-sm">
+              Choose a user from the list to start chatting.
+            </p>
           </div>
         )}
       </div>
     </div>
-  );
+  )
 } 

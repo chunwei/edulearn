@@ -23,10 +23,12 @@ export function AnnouncementsList({ announcements }: AnnouncementsListProps) {
       <CardHeader className="bg-white">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold text-gray-900">Announcements</h2>
-          <button className="text-sm text-blue-600 hover:text-blue-800">View All</button>
+          <button className="text-sm text-blue-600 hover:text-blue-800">
+            View All
+          </button>
         </div>
       </CardHeader>
-      
+
       <CardContent className="p-0">
         {announcements.length === 0 ? (
           <div className="text-center py-6">
@@ -35,19 +37,28 @@ export function AnnouncementsList({ announcements }: AnnouncementsListProps) {
         ) : (
           <ul className="divide-y divide-gray-200">
             {announcements.map((announcement) => (
-              <li key={announcement.id} className="p-4 hover:bg-gray-50 transition-colors">
+              <li
+                key={announcement.id}
+                className="p-4 hover:bg-gray-50 transition-colors"
+              >
                 <div className="flex space-x-3">
                   <div className="flex-shrink-0">
-                    <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                      <Bell className="h-5 w-5 text-blue-600" />
+                    <div className="size-10 rounded-full bg-blue-100 flex items-center justify-center">
+                      <Bell className="size-5 text-blue-600" />
                     </div>
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between">
-                      <p className="text-sm font-medium text-gray-900">{announcement.title}</p>
-                      <p className="text-xs text-gray-500">{formatDate(announcement.date)}</p>
+                      <p className="text-sm font-medium text-gray-900">
+                        {announcement.title}
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        {formatDate(announcement.date)}
+                      </p>
                     </div>
-                    <p className="text-sm text-gray-600 mt-1">{announcement.content}</p>
+                    <p className="text-sm text-gray-600 mt-1">
+                      {announcement.content}
+                    </p>
                   </div>
                 </div>
               </li>
@@ -56,5 +67,5 @@ export function AnnouncementsList({ announcements }: AnnouncementsListProps) {
         )}
       </CardContent>
     </Card>
-  );
+  )
 }

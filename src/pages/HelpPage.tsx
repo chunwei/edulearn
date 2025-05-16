@@ -13,20 +13,22 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="border-b border-gray-200 py-5">
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex justify-between items-center w-full text-left text-gray-700 hover:text-blue-600 focus:outline-none"
       >
         <span className="font-semibold text-lg">{question}</span>
-        {isOpen ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+        {isOpen ? (
+          <ChevronUp className="size-5" />
+        ) : (
+          <ChevronDown className="size-5" />
+        )}
       </button>
       {isOpen && (
-        <div className="mt-3 text-gray-600 leading-relaxed">
-          {answer}
-        </div>
+        <div className="mt-3 text-gray-600 leading-relaxed">{answer}</div>
       )}
     </div>
-  );
+  )
 };
 
 const faqs = [
@@ -78,52 +80,72 @@ export function HelpPage() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
       <header className="text-center mb-12">
-        <LifeBuoy className="h-16 w-16 text-blue-600 mx-auto mb-4"/>
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-800">Help Center</h1>
-        <p className="text-xl text-gray-600 mt-3">We're here to help! Find answers to common questions or contact us.</p>
+        <LifeBuoy className="h-16 w-16 text-blue-600 mx-auto mb-4" />
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-800">
+          Help Center
+        </h1>
+        <p className="text-xl text-gray-600 mt-3">
+          We're here to help! Find answers to common questions or contact us.
+        </p>
       </header>
 
       <section className="mb-12 p-6 bg-white shadow-lg rounded-lg">
         <div className="relative mb-8">
-            <Input 
-                type="text"
-                placeholder="Search FAQs (e.g., password, enrollment)"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 py-3 text-lg"
-            />
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-6 w-6 text-gray-400"/>
+          <Input
+            type="text"
+            placeholder="Search FAQs (e.g., password, enrollment)"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-12 py-3 text-lg"
+          />
+          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 size-6 text-gray-400" />
         </div>
         {filteredFaqs.length > 0 ? (
-            filteredFaqs.map((faq, index) => (
-                <FAQItem key={index} question={faq.question} answer={faq.answer} />
-            ))
+          filteredFaqs.map((faq, index) => (
+            <FAQItem key={index} question={faq.question} answer={faq.answer} />
+          ))
         ) : (
-            <p className="text-center text-gray-500 py-6">No FAQs found matching your search term.</p>
+          <p className="text-center text-gray-500 py-6">
+            No FAQs found matching your search term.
+          </p>
         )}
       </section>
 
       <section className="grid md:grid-cols-3 gap-8 mb-12 text-center">
         <div className="p-6 bg-gray-50 rounded-lg hover:shadow-md transition-shadow">
-            <BookOpen className="h-10 w-10 text-blue-600 mx-auto mb-3"/>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">Browse Documentation</h3>
-            <p className="text-gray-600 text-sm mb-3">Explore detailed guides and tutorials for using EduLearn.</p>
-            <Button variant="outline" size="sm">View Docs (Soon)</Button>
+          <BookOpen className="size-10 text-blue-600 mx-auto mb-3" />
+          <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            Browse Documentation
+          </h3>
+          <p className="text-gray-600 text-sm mb-3">
+            Explore detailed guides and tutorials for using EduLearn.
+          </p>
+          <Button variant="outline" size="sm">
+            View Docs (Soon)
+          </Button>
         </div>
         <div className="p-6 bg-gray-50 rounded-lg hover:shadow-md transition-shadow">
-            <MessageSquare className="h-10 w-10 text-blue-600 mx-auto mb-3"/>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">Community Forum</h3>
-            <p className="text-gray-600 text-sm mb-3">Ask questions and share knowledge with other users.</p>
-            <Button variant="outline" size="sm">
-                <Link to="/discussion">Visit Forum</Link>
-            </Button>
+          <MessageSquare className="size-10 text-blue-600 mx-auto mb-3" />
+          <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            Community Forum
+          </h3>
+          <p className="text-gray-600 text-sm mb-3">
+            Ask questions and share knowledge with other users.
+          </p>
+          <Button variant="outline" size="sm">
+            <Link to="/discussion">Visit Forum</Link>
+          </Button>
         </div>
         <div className="p-6 bg-gray-50 rounded-lg hover:shadow-md transition-shadow">
-            <LifeBuoy className="h-10 w-10 text-blue-600 mx-auto mb-3"/>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">Contact Support</h3>
-            <p className="text-gray-600 text-sm mb-3">Can't find what you need? Our support team is ready to assist.</p>
-            <Button /*variant="default"*/ size="sm">Contact Us (Soon)</Button>
-        </div> 
+          <LifeBuoy className="size-10 text-blue-600 mx-auto mb-3" />
+          <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            Contact Support
+          </h3>
+          <p className="text-gray-600 text-sm mb-3">
+            Can't find what you need? Our support team is ready to assist.
+          </p>
+          <Button /*variant="default"*/ size="sm">Contact Us (Soon)</Button>
+        </div>
       </section>
 
       {/* Optional: Contact Form Section */}
@@ -154,5 +176,5 @@ export function HelpPage() {
       </section>
       */}
     </div>
-  );
+  )
 } 

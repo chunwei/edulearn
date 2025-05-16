@@ -43,15 +43,17 @@ export function LoginForm() {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="mb-8 text-center">
         <h2 className="text-2xl font-bold text-gray-900">Welcome Back!</h2>
-        <p className="text-gray-600 mt-1">Please enter your credentials to continue</p>
+        <p className="text-gray-600 mt-1">
+          Please enter your credentials to continue
+        </p>
       </div>
-      
+
       {error && (
         <div className="bg-red-50 text-red-700 p-3 rounded-md text-sm mb-4">
           {error}
         </div>
       )}
-      
+
       <div className="space-y-2 mb-2">
         <p className="text-sm text-gray-600">Demo accounts:</p>
         <div className="grid grid-cols-1 gap-1 text-xs text-gray-500">
@@ -61,7 +63,7 @@ export function LoginForm() {
           <div>Password for all: password</div>
         </div>
       </div>
-      
+
       <Input
         label="Email"
         type="email"
@@ -71,7 +73,7 @@ export function LoginForm() {
         fullWidth
         required
       />
-      
+
       <Input
         label="Password"
         type="password"
@@ -81,33 +83,34 @@ export function LoginForm() {
         fullWidth
         required
       />
-      
+
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <input
             id="remember-me"
             name="remember-me"
             type="checkbox"
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            className="size-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
           />
-          <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+          <label
+            htmlFor="remember-me"
+            className="ml-2 block text-sm text-gray-700"
+          >
             Remember me
           </label>
         </div>
-        
-        <a href="#" className="text-sm font-medium text-blue-600 hover:text-blue-800">
+
+        <a
+          href="#"
+          className="text-sm font-medium text-blue-600 hover:text-blue-800"
+        >
           Forgot password?
         </a>
       </div>
-      
-      <Button
-        type="submit"
-        fullWidth
-        disabled={isLoading}
-        className="mt-6"
-      >
+
+      <Button type="submit" fullWidth disabled={isLoading} className="mt-6">
         {isLoading ? 'Signing in...' : 'Sign in'}
       </Button>
     </form>
-  );
+  )
 }

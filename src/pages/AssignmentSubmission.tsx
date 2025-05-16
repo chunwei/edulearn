@@ -21,44 +21,53 @@ export function AssignmentSubmission() {
     <div className="py-6 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">Assignment Submission</h1>
+          <h1 className="text-2xl font-bold text-gray-900">
+            Assignment Submission
+          </h1>
           <p className="mt-1 text-sm text-gray-500">
             Submit your completed assignment for review
           </p>
         </div>
-        
+
         <div className="grid gap-6">
           <Card>
             <CardHeader>
-              <h2 className="text-lg font-semibold text-gray-900">Assignment Details</h2>
+              <h2 className="text-lg font-semibold text-gray-900">
+                Assignment Details
+              </h2>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-base font-medium text-gray-900">Web Development Project</h3>
+                  <h3 className="text-base font-medium text-gray-900">
+                    Web Development Project
+                  </h3>
                   <p className="mt-1 text-sm text-gray-500">
-                    Create a responsive landing page using HTML, CSS, and JavaScript.
+                    Create a responsive landing page using HTML, CSS, and
+                    JavaScript.
                   </p>
                 </div>
-                
+
                 <div className="flex items-center space-x-6">
                   <div className="flex items-center text-sm text-gray-500">
-                    <Clock className="h-4 w-4 mr-1" />
+                    <Clock className="size-4 mr-1" />
                     <span>Due: March 15, 2025</span>
                   </div>
-                  
+
                   <div className="flex items-center text-sm text-gray-500">
-                    <Award className="h-4 w-4 mr-1" />
+                    <Award className="size-4 mr-1" />
                     <span>100 points</span>
                   </div>
                 </div>
               </div>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardHeader>
-              <h2 className="text-lg font-semibold text-gray-900">Your Submission</h2>
+              <h2 className="text-lg font-semibold text-gray-900">
+                Your Submission
+              </h2>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -72,7 +81,7 @@ export function AssignmentSubmission() {
                     placeholder="Add any notes or comments about your submission"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Upload Files
@@ -97,7 +106,7 @@ export function AssignmentSubmission() {
                       </p>
                     </div>
                   </div>
-                  
+
                   {files.length > 0 && (
                     <ul className="mt-4 space-y-2">
                       {files.map((file, index) => (
@@ -114,7 +123,7 @@ export function AssignmentSubmission() {
                     </ul>
                   )}
                 </div>
-                
+
                 <div className="flex justify-end space-x-3">
                   <Button variant="outline">Save as Draft</Button>
                   <Button type="submit">Submit Assignment</Button>
@@ -125,5 +134,5 @@ export function AssignmentSubmission() {
         </div>
       </div>
     </div>
-  );
+  )
 }

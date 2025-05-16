@@ -40,11 +40,16 @@ export function CoursePage() {
       {/* Course content sidebar */}
       <div className="w-80 border-r border-gray-200 flex flex-col">
         <div className="p-4 border-b border-gray-200">
-          <button onClick={() => navigate('/courses')} className="flex items-center text-sm text-gray-500 hover:text-gray-700">
-            <ArrowLeft className="h-4 w-4 mr-1" />
+          <button
+            onClick={() => navigate('/courses')}
+            className="flex items-center text-sm text-gray-500 hover:text-gray-700"
+          >
+            <ArrowLeft className="size-4 mr-1" />
             Back to Courses
           </button>
-          <h1 className="text-lg font-semibold text-gray-900 mt-2">{course.title}</h1>
+          <h1 className="text-lg font-semibold text-gray-900 mt-2">
+            {course.title}
+          </h1>
         </div>
         <CourseContent
           course={course}
@@ -52,13 +57,13 @@ export function CoursePage() {
           onSelectLesson={setCurrentLesson}
         />
       </div>
-      
+
       {/* Lesson viewer */}
       <div className="flex-1">
         {currentLesson ? (
           <LessonViewer lesson={currentLesson} courseId={course.id} />
         ) : course.lessons.length > 0 ? (
-           <div className="h-full flex items-center justify-center">
+          <div className="h-full flex items-center justify-center">
             <p className="text-gray-500">Select a lesson to begin.</p>
           </div>
         ) : (
@@ -68,5 +73,5 @@ export function CoursePage() {
         )}
       </div>
     </div>
-  );
+  )
 }

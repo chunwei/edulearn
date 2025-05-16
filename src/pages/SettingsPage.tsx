@@ -86,29 +86,48 @@ export function SettingsPage() {
     <div className="container mx-auto px-4 py-12 max-w-3xl">
       <header className="mb-10">
         <h1 className="text-4xl font-bold text-gray-800">Settings</h1>
-        <p className="text-lg text-gray-600">Manage your account preferences and security settings.</p>
+        <p className="text-lg text-gray-600">
+          Manage your account preferences and security settings.
+        </p>
       </header>
 
       {/* General Settings Section */}
       <section className="mb-10 p-6 bg-white shadow-lg rounded-lg">
         <h2 className="text-2xl font-semibold text-gray-700 mb-6 border-b pb-3 flex items-center">
-            <Bell className="mr-3 h-6 w-6 text-blue-600"/> Notification Preferences
+          <Bell className="mr-3 size-6 text-blue-600" /> Notification
+          Preferences
         </h2>
         <div className="space-y-5">
           <div className="flex items-center justify-between">
             <label htmlFor="emailNotifications" className="text-gray-700">
-                Email Notifications
-                <p className="text-xs text-gray-500">Receive important updates via email.</p>
+              Email Notifications
+              <p className="text-xs text-gray-500">
+                Receive important updates via email.
+              </p>
             </label>
-            <Switch id="emailNotifications" checked={settings.emailNotifications} onCheckedChange={(val) => handleSettingChange('emailNotifications', val)} />
+            <Switch
+              id="emailNotifications"
+              checked={settings.emailNotifications}
+              onCheckedChange={(val) =>
+                handleSettingChange('emailNotifications', val)
+              }
+            />
           </div>
           {/* Add SMS and Push notifications similarly if Switch component is available */}
           <div className="flex items-center justify-between">
             <label htmlFor="pushNotifications" className="text-gray-700">
-                Push Notifications
-                <p className="text-xs text-gray-500">Get real-time alerts on your device. (Requires App)</p>
+              Push Notifications
+              <p className="text-xs text-gray-500">
+                Get real-time alerts on your device. (Requires App)
+              </p>
             </label>
-            <Switch id="pushNotifications" checked={settings.pushNotifications} onCheckedChange={(val) => handleSettingChange('pushNotifications', val)} />
+            <Switch
+              id="pushNotifications"
+              checked={settings.pushNotifications}
+              onCheckedChange={(val) =>
+                handleSettingChange('pushNotifications', val)
+              }
+            />
           </div>
         </div>
       </section>
@@ -116,70 +135,155 @@ export function SettingsPage() {
       {/* Appearance Settings */}
       <section className="mb-10 p-6 bg-white shadow-lg rounded-lg">
         <h2 className="text-2xl font-semibold text-gray-700 mb-6 border-b pb-3 flex items-center">
-            <Palette className="mr-3 h-6 w-6 text-purple-600"/> Appearance
+          <Palette className="mr-3 size-6 text-purple-600" /> Appearance
         </h2>
         <div className="space-y-5">
-            <div>
-                <label htmlFor="theme" className="block text-sm font-medium text-gray-700 mb-1">Theme</label>
-                <Select value={settings.theme} onValueChange={(val) => handleSettingChange('theme', val as UserSettings['theme'])}>
-                    <SelectTrigger id="theme" className="w-full"><SelectValue placeholder="Select theme" /></SelectTrigger>
-                    <SelectContent>
-                        {themes.map(t => <SelectItem key={t.value} value={t.value}>{t.label}</SelectItem>)}
-                    </SelectContent>
-                </Select>
-            </div>
-            <div>
-                <label htmlFor="language" className="block text-sm font-medium text-gray-700 mb-1">Language</label>
-                <Select value={settings.language} onValueChange={(val: string) => handleSettingChange('language', val)}>
-                    <SelectTrigger id="language" className="w-full"><SelectValue placeholder="Select language" /></SelectTrigger>
-                    <SelectContent>
-                        {languages.map(l => <SelectItem key={l.value} value={l.value}>{l.label}</SelectItem>)}
-                    </SelectContent>
-                </Select>
-            </div>
+          <div>
+            <label
+              htmlFor="theme"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Theme
+            </label>
+            <Select
+              value={settings.theme}
+              onValueChange={(val) =>
+                handleSettingChange('theme', val as UserSettings['theme'])
+              }
+            >
+              <SelectTrigger id="theme" className="w-full">
+                <SelectValue placeholder="Select theme" />
+              </SelectTrigger>
+              <SelectContent>
+                {themes.map((t) => (
+                  <SelectItem key={t.value} value={t.value}>
+                    {t.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <label
+              htmlFor="language"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Language
+            </label>
+            <Select
+              value={settings.language}
+              onValueChange={(val: string) =>
+                handleSettingChange('language', val)
+              }
+            >
+              <SelectTrigger id="language" className="w-full">
+                <SelectValue placeholder="Select language" />
+              </SelectTrigger>
+              <SelectContent>
+                {languages.map((l) => (
+                  <SelectItem key={l.value} value={l.value}>
+                    {l.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </section>
 
       {/* Security Settings Section */}
       <section className="mb-10 p-6 bg-white shadow-lg rounded-lg">
         <h2 className="text-2xl font-semibold text-gray-700 mb-6 border-b pb-3 flex items-center">
-            <ShieldCheck className="mr-3 h-6 w-6 text-green-600"/> Account Security
+          <ShieldCheck className="mr-3 size-6 text-green-600" /> Account
+          Security
         </h2>
         <form onSubmit={handlePasswordChange} className="space-y-4">
           <div>
-            <label htmlFor="currentPassword" className="block text-sm font-medium text-gray-700">Current Password</label>
-            <Input type="password" id="currentPassword" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} required className="mt-1"/>
+            <label
+              htmlFor="currentPassword"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Current Password
+            </label>
+            <Input
+              type="password"
+              id="currentPassword"
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+              required
+              className="mt-1"
+            />
           </div>
           <div>
-            <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700">New Password</label>
-            <Input type="password" id="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required className="mt-1"/>
+            <label
+              htmlFor="newPassword"
+              className="block text-sm font-medium text-gray-700"
+            >
+              New Password
+            </label>
+            <Input
+              type="password"
+              id="newPassword"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              required
+              className="mt-1"
+            />
           </div>
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">Confirm New Password</label>
-            <Input type="password" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required className="mt-1"/>
+            <label
+              htmlFor="confirmPassword"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Confirm New Password
+            </label>
+            <Input
+              type="password"
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              className="mt-1"
+            />
           </div>
-          {passwordError && <p className="text-sm text-red-600">{passwordError}</p>}
-          {passwordSuccess && <p className="text-sm text-green-600">{passwordSuccess}</p>}
+          {passwordError && (
+            <p className="text-sm text-red-600">{passwordError}</p>
+          )}
+          {passwordSuccess && (
+            <p className="text-sm text-green-600">{passwordSuccess}</p>
+          )}
           <Button type="submit" className="flex items-center">
-            <Lock className="mr-2 h-4 w-4"/> Change Password
+            <Lock className="mr-2 size-4" /> Change Password
           </Button>
         </form>
         <div className="mt-6 pt-6 border-t">
-             <div className="flex items-center justify-between">
-                <label htmlFor="twoFactorEnabled" className="text-gray-700">
-                    Two-Factor Authentication (2FA)
-                    <p className="text-xs text-gray-500">Enhance your account security.</p>
-                </label>
-                <Switch id="twoFactorEnabled" checked={settings.twoFactorEnabled} onCheckedChange={(val) => handleSettingChange('twoFactorEnabled', val)} />
-            </div>
+          <div className="flex items-center justify-between">
+            <label htmlFor="twoFactorEnabled" className="text-gray-700">
+              Two-Factor Authentication (2FA)
+              <p className="text-xs text-gray-500">
+                Enhance your account security.
+              </p>
+            </label>
+            <Switch
+              id="twoFactorEnabled"
+              checked={settings.twoFactorEnabled}
+              onCheckedChange={(val) =>
+                handleSettingChange('twoFactorEnabled', val)
+              }
+            />
+          </div>
         </div>
       </section>
 
       <div className="mt-12 text-center">
-        <Button variant="danger" onClick={logout} className="flex items-center mx-auto">
-            <LogOut className="mr-2 h-5 w-5"/> Log Out
+        <Button
+          variant="danger"
+          onClick={logout}
+          className="flex items-center mx-auto"
+        >
+          <LogOut className="mr-2 size-5" /> Log Out
         </Button>
       </div>
     </div>
-  );
+  )
 } 

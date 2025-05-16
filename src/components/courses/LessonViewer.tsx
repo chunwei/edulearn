@@ -56,22 +56,24 @@ function MaterialCard({ material }: MaterialCardProps) {
     <Card hoverable>
       <CardContent className="p-4">
         <div className="flex items-center">
-          <div className="h-10 w-10 rounded-lg bg-blue-100 flex items-center justify-center">
-            <FileText className="h-5 w-5 text-blue-600" />
+          <div className="size-10 rounded-lg bg-blue-100 flex items-center justify-center">
+            <FileText className="size-5 text-blue-600" />
           </div>
-          
+
           <div className="ml-3 flex-1">
-            <h4 className="text-sm font-medium text-gray-900">{material.title}</h4>
+            <h4 className="text-sm font-medium text-gray-900">
+              {material.title}
+            </h4>
             <p className="text-xs text-gray-500 capitalize">{material.type}</p>
           </div>
-          
+
           {material.url && (
             <button className="ml-4 p-2 text-gray-400 hover:text-gray-500">
-              <Download className="h-5 w-5" />
+              <Download className="size-5" />
             </button>
           )}
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

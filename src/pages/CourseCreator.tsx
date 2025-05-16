@@ -27,12 +27,16 @@ export function CourseCreator() {
   return (
     <div className="py-6 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Create New Course</h1>
-        
+        <h1 className="text-2xl font-bold text-gray-900 mb-6">
+          Create New Course
+        </h1>
+
         <form onSubmit={handleSubmit}>
           <Card className="mb-6">
             <CardHeader>
-              <h2 className="text-lg font-semibold text-gray-900">Course Details</h2>
+              <h2 className="text-lg font-semibold text-gray-900">
+                Course Details
+              </h2>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -42,7 +46,7 @@ export function CourseCreator() {
                   required
                   fullWidth
                 />
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Course Description
@@ -54,20 +58,16 @@ export function CourseCreator() {
                     required
                   />
                 </div>
-                
+
                 <div className="grid grid-cols-2 gap-4">
                   <Input
                     label="Category"
                     placeholder="e.g., Web Development"
                     required
                   />
-                  <Input
-                    label="Level"
-                    placeholder="e.g., Beginner"
-                    required
-                  />
+                  <Input label="Level" placeholder="e.g., Beginner" required />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Course Thumbnail
@@ -82,25 +82,29 @@ export function CourseCreator() {
                         </label>
                         <p className="pl-1">or drag and drop</p>
                       </div>
-                      <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                      <p className="text-xs text-gray-500">
+                        PNG, JPG, GIF up to 10MB
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
             </CardContent>
           </Card>
-          
+
           <Card className="mb-6">
             <CardHeader>
               <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-gray-900">Course Lessons</h2>
+                <h2 className="text-lg font-semibold text-gray-900">
+                  Course Lessons
+                </h2>
                 <Button
                   type="button"
                   variant="outline"
                   onClick={addLesson}
                   className="flex items-center"
                 >
-                  <PlusCircle className="h-4 w-4 mr-2" />
+                  <PlusCircle className="size-4 mr-2" />
                   Add Lesson
                 </Button>
               </div>
@@ -114,9 +118,9 @@ export function CourseCreator() {
                       onClick={() => removeLesson(index)}
                       className="absolute top-2 right-2 text-gray-400 hover:text-red-500"
                     >
-                      <Trash2 className="h-4 w-4" />
+                      <Trash2 className="size-4" />
                     </button>
-                    
+
                     <div className="grid gap-4">
                       <Input
                         label={`Lesson ${index + 1} Title`}
@@ -124,7 +128,7 @@ export function CourseCreator() {
                         required
                         fullWidth
                       />
-                      
+
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
                           Lesson Description
@@ -136,7 +140,7 @@ export function CourseCreator() {
                           required
                         />
                       </div>
-                      
+
                       <Input
                         label="Duration"
                         placeholder="e.g., 45 minutes"
@@ -148,7 +152,7 @@ export function CourseCreator() {
               </div>
             </CardContent>
           </Card>
-          
+
           <div className="flex justify-end space-x-3">
             <Button variant="outline">Cancel</Button>
             <Button type="submit">Create Course</Button>
@@ -156,5 +160,5 @@ export function CourseCreator() {
         </form>
       </div>
     </div>
-  );
+  )
 }

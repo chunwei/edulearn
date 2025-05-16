@@ -77,27 +77,87 @@ const EventModal: React.FC<EventModalProps> = ({ event, isOpen, onClose, onSave,
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
-        <h2 className="text-2xl font-semibold mb-4">{isNew ? 'Add New Event' : 'Edit Event'}</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          {isNew ? 'Add New Event' : 'Edit Event'}
+        </h2>
         <div className="space-y-4">
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
-            <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" />
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Title
+            </label>
+            <input
+              type="text"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+            />
           </div>
           <div>
-            <label htmlFor="start" className="block text-sm font-medium text-gray-700">Start</label>
-            <input type="datetime-local" id="start" value={start} onChange={(e) => setStart(e.target.value)} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" disabled={allDay}/>
+            <label
+              htmlFor="start"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Start
+            </label>
+            <input
+              type="datetime-local"
+              id="start"
+              value={start}
+              onChange={(e) => setStart(e.target.value)}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              disabled={allDay}
+            />
           </div>
           <div>
-            <label htmlFor="end" className="block text-sm font-medium text-gray-700">End</label>
-            <input type="datetime-local" id="end" value={end} onChange={(e) => setEnd(e.target.value)} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" disabled={allDay}/>
+            <label
+              htmlFor="end"
+              className="block text-sm font-medium text-gray-700"
+            >
+              End
+            </label>
+            <input
+              type="datetime-local"
+              id="end"
+              value={end}
+              onChange={(e) => setEnd(e.target.value)}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              disabled={allDay}
+            />
           </div>
           <div className="flex items-center">
-            <input type="checkbox" id="allDay" checked={allDay} onChange={(e) => setAllDay(e.target.checked)} className="h-4 w-4 text-blue-600 border-gray-300 rounded"/>
-            <label htmlFor="allDay" className="ml-2 block text-sm text-gray-900">All day</label>
+            <input
+              type="checkbox"
+              id="allDay"
+              checked={allDay}
+              onChange={(e) => setAllDay(e.target.checked)}
+              className="size-4 text-blue-600 border-gray-300 rounded"
+            />
+            <label
+              htmlFor="allDay"
+              className="ml-2 block text-sm text-gray-900"
+            >
+              All day
+            </label>
           </div>
           <div>
-            <label htmlFor="type" className="block text-sm font-medium text-gray-700">Type</label>
-            <select id="type" value={type} onChange={(e) => setType(e.target.value as MyCalendarEventType['type'])} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+            <label
+              htmlFor="type"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Type
+            </label>
+            <select
+              id="type"
+              value={type}
+              onChange={(e) =>
+                setType(e.target.value as MyCalendarEventType['type'])
+              }
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+            >
               <option value="personal">Personal</option>
               <option value="live-class">Live Class</option>
               <option value="assignment-due">Assignment Due</option>
@@ -107,17 +167,30 @@ const EventModal: React.FC<EventModalProps> = ({ event, isOpen, onClose, onSave,
             </select>
           </div>
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description (Optional)</label>
-            <textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} rows={3} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"></textarea>
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Description (Optional)
+            </label>
+            <textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows={3}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+            ></textarea>
           </div>
         </div>
         <div className="mt-6 flex justify-end space-x-3">
-          <Button variant="outline" onClick={onClose}>Cancel</Button>
+          <Button variant="outline" onClick={onClose}>
+            Cancel
+          </Button>
           <Button onClick={handleSubmit}>Save Event</Button>
         </div>
       </div>
     </div>
-  );
+  )
 };
 
 export function CalendarPage() {
@@ -200,26 +273,46 @@ export function CalendarPage() {
     <div className="container mx-auto px-4 py-8">
       <header className="mb-6 flex justify-between items-center">
         <div>
-            <h1 className="text-3xl font-bold text-gray-800">Calendar</h1>
-            <p className="text-md text-gray-600">Manage your schedule, deadlines, and important events.</p>
+          <h1 className="text-3xl font-bold text-gray-800">Calendar</h1>
+          <p className="text-md text-gray-600">
+            Manage your schedule, deadlines, and important events.
+          </p>
         </div>
         {authUser && (
-            <Button onClick={() => { setSelectedEvent(null); setIsNewEvent(true); setIsModalOpen(true);}}>
-                <PlusCircle className="mr-2 h-5 w-5" /> Add Event
-            </Button>
+          <Button
+            onClick={() => {
+              setSelectedEvent(null)
+              setIsNewEvent(true)
+              setIsModalOpen(true)
+            }}
+          >
+            <PlusCircle className="mr-2 size-5" /> Add Event
+          </Button>
         )}
       </header>
 
       {!authUser && (
-         <div className="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg text-center" role="alert">
-            <AlertTriangle className="inline mr-2 h-5 w-5" /> You are viewing a public calendar. <Link to="/login" className="font-semibold hover:underline">Log in</Link> to see your personalized events and add new ones.
+        <div
+          className="p-4 mb-4 text-sm text-yellow-700 bg-yellow-100 rounded-lg text-center"
+          role="alert"
+        >
+          <AlertTriangle className="inline mr-2 size-5" /> You are viewing a
+          public calendar.{' '}
+          <Link to="/login" className="font-semibold hover:underline">
+            Log in
+          </Link>{' '}
+          to see your personalized events and add new ones.
         </div>
       )}
 
       <div className="bg-white p-2 sm:p-4 rounded-lg shadow h-[70vh] min-h-[600px]">
         <Calendar
           localizer={localizer}
-          events={events.map(e => ({...e, start: new Date(e.start), end: new Date(e.end)}))}
+          events={events.map((e) => ({
+            ...e,
+            start: new Date(e.start),
+            end: new Date(e.end)
+          }))}
           startAccessor="start"
           endAccessor="end"
           style={{ height: '100%' }}
@@ -234,7 +327,7 @@ export function CalendarPage() {
           // }}
         />
       </div>
-      <EventModal 
+      <EventModal
         event={selectedEvent}
         isOpen={isModalOpen}
         onClose={closeModal}
@@ -242,7 +335,7 @@ export function CalendarPage() {
         isNew={isNewEvent}
       />
     </div>
-  );
+  )
 }
 
 // Optional Custom Event Component Example

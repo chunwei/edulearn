@@ -82,91 +82,134 @@ export function ProfilePage() {
       <div className="bg-white shadow-xl rounded-lg p-6 md:p-10">
         <div className="flex flex-col md:flex-row items-center md:items-start">
           <Avatar className="h-32 w-32 md:mr-8 mb-6 md:mb-0 rounded-full shadow-md ring-2 ring-blue-500 ring-offset-2 text-4xl">
-            <AvatarImage src={isEditing ? avatarUrl : profileUser.avatar} alt={profileUser.name} />
+            <AvatarImage
+              src={isEditing ? avatarUrl : profileUser.avatar}
+              alt={profileUser.name}
+            />
             <AvatarFallback className="text-4xl">
-                {profileUser.name ? profileUser.name.substring(0,1).toUpperCase() : <UserCircle2 className="h-24 w-24 text-gray-400"/>}
+              {profileUser.name ? (
+                profileUser.name.substring(0, 1).toUpperCase()
+              ) : (
+                <UserCircle2 className="h-24 w-24 text-gray-400" />
+              )}
             </AvatarFallback>
           </Avatar>
 
           <div className="flex-grow text-center md:text-left">
             {isEditing ? (
-              <Input 
-                type="text" 
-                value={name} 
-                onChange={(e) => setName(e.target.value)} 
+              <Input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="text-3xl font-bold text-gray-800 mb-1 w-full p-2 border rounded"
               />
             ) : (
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-1">{profileUser.name}</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-1">
+                {profileUser.name}
+              </h1>
             )}
             <p className="text-md text-blue-600 font-semibold mb-3 capitalize flex items-center justify-center md:justify-start">
-                {profileUser.role === 'instructor' ? <Briefcase className="mr-2 h-5 w-5"/> : <GraduationCap className="mr-2 h-5 w-5"/>} 
-                {profileUser.role}
+              {profileUser.role === 'instructor' ? (
+                <Briefcase className="mr-2 size-5" />
+              ) : (
+                <GraduationCap className="mr-2 size-5" />
+              )}
+              {profileUser.role}
             </p>
             {isEditing ? (
-              <Input 
-                type="text" 
-                value={avatarUrl} 
-                onChange={(e) => setAvatarUrl(e.target.value)} 
-                placeholder="Enter image URL for avatar" 
+              <Input
+                type="text"
+                value={avatarUrl}
+                onChange={(e) => setAvatarUrl(e.target.value)}
+                placeholder="Enter image URL for avatar"
                 className="text-sm text-gray-600 mb-4 w-full p-2 border rounded"
               />
             ) : null}
-             <p className="text-sm text-gray-600 flex items-center justify-center md:justify-start mb-1">
-                <Mail className="mr-2 h-4 w-4 text-gray-500" /> {profileUser.email}
+            <p className="text-sm text-gray-600 flex items-center justify-center md:justify-start mb-1">
+              <Mail className="mr-2 size-4 text-gray-500" /> {profileUser.email}
             </p>
           </div>
           <div className="mt-6 md:mt-0 md:ml-auto">
             {isEditing ? (
               <Button onClick={handleSave} size="sm">
-                <Save className="mr-2 h-4 w-4"/> Save Changes
+                <Save className="mr-2 size-4" /> Save Changes
               </Button>
             ) : (
-              <Button onClick={() => setIsEditing(true)} variant="outline" size="sm">
-                <Edit3 className="mr-2 h-4 w-4"/> Edit Profile
+              <Button
+                onClick={() => setIsEditing(true)}
+                variant="outline"
+                size="sm"
+              >
+                <Edit3 className="mr-2 size-4" /> Edit Profile
               </Button>
             )}
           </div>
         </div>
 
         {isEditing && (
-            <div className="mt-6 border-t pt-6">
-                 <h3 className="text-lg font-semibold text-gray-700 mb-2">Edit Email (Caution)</h3>
-                 <Input 
-                    type="email" 
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)} 
-                    placeholder="Enter new email (requires verification in real app)" 
-                    className="text-sm text-gray-600 mb-4 w-full md:w-1/2 p-2 border rounded"
-                    disabled // Typically email changes are more complex or disabled directly on profile edit.
-                />
-                <p className="text-xs text-gray-500">Changing email usually requires a verification process. This field is disabled for this demo.</p>
-            </div>
+          <div className="mt-6 border-t pt-6">
+            <h3 className="text-lg font-semibold text-gray-700 mb-2">
+              Edit Email (Caution)
+            </h3>
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter new email (requires verification in real app)"
+              className="text-sm text-gray-600 mb-4 w-full md:w-1/2 p-2 border rounded"
+              disabled // Typically email changes are more complex or disabled directly on profile edit.
+            />
+            <p className="text-xs text-gray-500">
+              Changing email usually requires a verification process. This field
+              is disabled for this demo.
+            </p>
+          </div>
         )}
 
         <div className="mt-8 border-t pt-8">
           <h2 className="text-2xl font-semibold text-gray-700 mb-4">
-            {profileUser.role === 'student' ? 'Enrolled Courses' : profileUser.role === 'instructor' ? 'My Teachings' : 'Platform Activity'}
+            {profileUser.role === 'student'
+              ? 'Enrolled Courses'
+              : profileUser.role === 'instructor'
+              ? 'My Teachings'
+              : 'Platform Activity'}
           </h2>
           {userAssociatedCourses.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {userAssociatedCourses.map(course => (
-                <Link to={`/courses/${course.id}`} key={course.id} className="block p-4 bg-gray-50 hover:bg-gray-100 rounded-lg shadow-sm transition-colors">
-                  <h3 className="font-semibold text-blue-700">{course.title}</h3>
-                  <p className="text-sm text-gray-600">{course.category} - {course.level}</p>
-                  <p className="text-xs text-gray-500 mt-1">{course.duration}</p>
+              {userAssociatedCourses.map((course) => (
+                <Link
+                  to={`/courses/${course.id}`}
+                  key={course.id}
+                  className="block p-4 bg-gray-50 hover:bg-gray-100 rounded-lg shadow-sm transition-colors"
+                >
+                  <h3 className="font-semibold text-blue-700">
+                    {course.title}
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    {course.category} - {course.level}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {course.duration}
+                  </p>
                 </Link>
               ))}
             </div>
           ) : (
             <p className="text-gray-500">
-              {profileUser.role === 'student' ? 'No courses enrolled yet. ' : profileUser.role === 'instructor' ? 'You are not teaching any courses yet. ' : 'No specific activity to display for admin.'}
-              {profileUser.role === 'student' && <Link to="/courses" className="text-blue-600 hover:underline">Explore courses</Link>}
+              {profileUser.role === 'student'
+                ? 'No courses enrolled yet. '
+                : profileUser.role === 'instructor'
+                ? 'You are not teaching any courses yet. '
+                : 'No specific activity to display for admin.'}
+              {profileUser.role === 'student' && (
+                <Link to="/courses" className="text-blue-600 hover:underline">
+                  Explore courses
+                </Link>
+              )}
             </p>
           )}
         </div>
-
       </div>
     </div>
-  );
+  )
 } 
