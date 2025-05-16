@@ -15,7 +15,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
     <div className="border-b border-gray-200 py-5">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex justify-between items-center w-full text-left text-gray-700 hover:text-blue-600 focus:outline-none"
+        className="flex justify-between items-center w-full text-left text-gray-700 hover:text-blue-600 focus:outline-hidden"
       >
         <span className="font-semibold text-lg">{question}</span>
         {isOpen ? (
@@ -177,4 +177,4 @@ export function HelpPage() {
       */}
     </div>
   )
-} 
+}

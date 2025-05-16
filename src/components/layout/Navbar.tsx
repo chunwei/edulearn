@@ -84,7 +84,7 @@ export function Navbar() {
                   <ChevronDown className="ml-1 size-4 text-gray-400" />
                 </button>
 
-                <div className="origin-top-right absolute right-0 top-full -mt-px w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible focus:outline-none transition ease-in-out duration-100 z-50">
+                <div className="origin-top-right absolute right-0 top-full -mt-px w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black/5 opacity-0 invisible group-hover:opacity-100 group-hover:visible focus:outline-none transition ease-in-out duration-100 z-50">
                   <div className="block px-4 py-2 text-xs text-gray-400 border-b border-gray-100">
                     Signed in as{' '}
                     <span className="font-medium text-gray-900">

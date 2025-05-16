@@ -21,7 +21,7 @@ export function DashboardHeader() {
         </div>
         
         {user?.role === 'student' && (
-          <div className="mt-4 md:mt-0 bg-white p-3 rounded-lg shadow-sm border border-gray-200 flex items-center">
+          <div className="mt-4 md:mt-0 bg-white p-3 rounded-lg shadow-xs border border-gray-200 flex items-center">
             <div className="mr-4">
               <p className="text-xs font-medium text-gray-500">Current Progress</p>
               <div className="flex items-center">
