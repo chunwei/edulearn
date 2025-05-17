@@ -36,6 +36,11 @@
     --sidebar-accent-foreground: oklch(0.205 0 0);
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
+    --header-height: calc(theme(spacing.14));
+      --container-wrapper-max-width: 1400px;
+      --container-max-width: 1536px;
+      --container-padding-x: 1rem;
+      --sidebar-left: calc((100vw - min(100vw, var(--container-wrapper-max-width))) / 2 + var(--container-padding-x));
 }
 
 .dark {
@@ -109,13 +114,71 @@
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-ring: var(--sidebar-ring);
   }
-  
+
   @layer base {
     * {
       @apply border-border outline-ring/50;
     }
-  
+
     body {
       @apply bg-background text-foreground;
     }
+}
+
+.border-grid {
+  border-style: dashed;
+  border-color: hsl(var(--border)/.5);
+}
+
+.border-grid:is(.dark *) {
+  border-color: hsl(var(--border))
+}
+
+.container-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: var(--container-wrapper-max-width);
+  border-style: dashed;
+  border-color: hsl(var(--border)/.7)
+}
+
+.container-wrapper:is(.dark *) {
+  border-color: hsl(var(--border))
+}
+
+@media (min-width: 1400px) {
+  .container-wrapper {
+    border-left-width: 1px;
+    border-right-width: 1px
+  }
+}
+
+@media (min-width: 1800px) {
+  :root {
+    --container-wrapper-max-width: 1536px;
+  }
+
+  /* .container-wrapper {
+    max-width: 1536px
+  } */
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--container-max-width);
+  padding-left: var(--container-padding-x);
+  padding-right: var(--container-padding-x)
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --container-padding-x: 1.5rem;
+  }
+
+  /* .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem
+  } */
 }
