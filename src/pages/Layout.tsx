@@ -16,6 +16,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb'
+import { useLocation } from 'react-router-dom'
 
 interface LayoutProps {
   children: ReactNode
@@ -28,12 +29,27 @@ interface LayoutProps {
  */
 export function Layout({ children }: LayoutProps) {
   const { isAuthenticated } = useAuth()
+  const location = useLocation()
 
-  // 如果未认证，只渲染子组件（应该是登录页面）
+  // 检查当前路径是否为认证相关页面
+  const isAuthPage = [
+    '/login',
+    '/sign-up',
+    '/forgot-password',
+    '/update-password'
+  ].includes(location.pathname)
+
+  // 如果是认证页面，直接渲染子组件（由 AuthLayout 处理布局）
+  if (isAuthPage) {
+    return <>{children}</>
+  }
+
+  // 如果未认证且不是认证页面，也直接渲染子组件（应该是重定向到登录页面）
   if (!isAuthenticated) {
     return <>{children}</>
   }
 
+  // 已认证的应用页面使用完整布局
   return (
     <div className="relative min-h-svh flex flex-col">
       {/* 顶部导航栏 */}
@@ -46,7 +62,7 @@ export function Layout({ children }: LayoutProps) {
             <SidebarProvider>
               <AppSidebar />
               <SidebarInset>
-                <header className="flex h-16 shrink-0 items-center gap-2 border-b">
+                {/* <header className="flex h-16 shrink-0 items-center gap-2 border-b">
                   <div className="flex items-center gap-2 px-3">
                     <SidebarTrigger />
                     <Separator orientation="vertical" className="mr-2 h-4" />
@@ -64,7 +80,7 @@ export function Layout({ children }: LayoutProps) {
                       </BreadcrumbList>
                     </Breadcrumb>
                   </div>
-                </header>
+                </header> */}
                 <main className="flex-1 overflow-y-auto bg-background">
                   {children}
                 </main>

@@ -1,26 +1,24 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { mockUsers } from '../data/mockData';
-// Course type might not be needed here anymore if all display logic is moved
-// import { Course } from '../types'; 
+// 移除 mockUsers 导入
+// import { mockUsers } from '../data/mockData';
 import { BookOpen, AlertTriangle } from 'lucide-react';
-// Specific course cards are not needed here anymore
-// import { EnrolledCourseCard } from '../components/courses/EnrolledCourseCard';
-// import { TaughtCourseCard } from '../components/courses/TaughtCourseCard';
-import { StudentCoursesPage } from './student/StudentCoursesPage'; // Import new student page
-import { InstructorCoursesPage } from './instructor/InstructorCoursesPage'; // Import new instructor page
+import { StudentCoursesPage } from './student/StudentCoursesPage';
+import { InstructorCoursesPage } from './instructor/InstructorCoursesPage';
 
+/**
+ * 我的课程页面组件
+ * 根据用户角色显示不同的课程视图
+ */
 export function MyCoursesPage() {
-  const { user: authUser } = useAuth();
+  // 直接使用 useAuth 获取的用户信息
+  const { user } = useAuth();
 
-  const currentUser = useMemo(() => {
-    if (!authUser) return null;
-    return mockUsers.find(u => u.id === authUser.id);
-  }, [authUser]);
+  // 移除 currentUser 变量和 useMemo
 
-  // Handle unauthenticated users
-  if (!authUser || !currentUser) {
+  // 处理未认证用户
+  if (!user) {
     return (
       <div className="container mx-auto px-4 py-8 text-center">
         <AlertTriangle className="h-16 w-16 text-red-500 mx-auto mb-4" />
@@ -30,36 +28,35 @@ export function MyCoursesPage() {
     );
   }
   
-  // Dispatch to role-specific pages or handle admin
-  if (currentUser.role === 'student') {
+  // 根据角色分发到特定页面
+  if (user.role === 'student') {
     return <StudentCoursesPage />;
   }
   
-  if (currentUser.role === 'instructor') {
+  if (user.role === 'instructor') {
     return <InstructorCoursesPage />;
   }
   
-  if (currentUser.role === 'admin') {
-      return (
-          <div className="container mx-auto px-4 py-8 text-center">
-            <BookOpen className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-            <h2 className="text-2xl font-semibold text-gray-700 mb-2">Course Management</h2>
-            <p className="text-gray-600">
-                As an administrator, you can manage all courses and user activities through the admin panel.
-            </p>
-            <Link to="/admin/dashboard" className="text-blue-600 hover:underline">
-                Go to Admin Dashboard
-            </Link>
-            {/* Or, if there's a dedicated AdminCoursesOverviewPage, render it here */}
-          </div>
-      );
+  if (user.role === 'admin') {
+    return (
+      <div className="container mx-auto px-4 py-8 text-center">
+        <BookOpen className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+        <h2 className="text-2xl font-semibold text-gray-700 mb-2">Course Management</h2>
+        <p className="text-gray-600">
+          As an administrator, you can manage all courses and user activities through the admin panel.
+        </p>
+        <Link to="/admin/dashboard" className="text-blue-600 hover:underline">
+          Go to Admin Dashboard
+        </Link>
+      </div>
+    );
   }
 
-  // Fallback for any other unhandled role or scenario, though ideally this shouldn't be reached
+  // 回退处理
   return (
     <div className="container mx-auto px-4 py-8 text-center">
-        <h2 className="text-2xl font-semibold text-gray-700 mb-2">My Courses</h2>
-        <p className="text-gray-600">Could not determine user role to display courses.</p>
+      <h2 className="text-2xl font-semibold text-gray-700 mb-2">My Courses</h2>
+      <p className="text-gray-600">Could not determine user role to display courses.</p>
     </div>
   );
-} 
+}

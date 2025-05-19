@@ -23,9 +23,10 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarFooter
+  SidebarFooter,
+  SidebarRail
 } from '../ui/sidebar'
-import { NavUser } from './NavUser'
+import { NavUser } from './SidebarUser'
 
 /**
  * 应用程序侧边栏组件
@@ -35,33 +36,32 @@ import { NavUser } from './NavUser'
 export function AppSidebar() {
   const { user } = useAuth()
   const userRole = user?.role || 'student'
+  const showHeader = false
 
   return (
     <Sidebar
       collapsible="icon"
       className=" top-[var(--header-height)] left-[var(--sidebar-left)] !h-[calc(100svh-var(--header-height))]"
     >
-      <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <GraduationCap className="size-4" />
-                </div>
-                <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">EduLearn</span>
-                  <span className="">Online Education Platform</span>
-                </div>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-        {/* <h2 className="text-lg font-semibold text-foreground">EduLearn</h2>
-        <p className="text-sm text-muted-foreground">
-          Online Education Platform
-        </p> */}
-      </SidebarHeader>
+      {showHeader && (
+        <SidebarHeader>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton size="lg" asChild>
+                <a href="#">
+                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                    <GraduationCap className="size-4" />
+                  </div>
+                  <div className="flex flex-col gap-0.5 leading-none">
+                    <span className="font-semibold">EduLearn</span>
+                    <span className="">Online Education Platform</span>
+                  </div>
+                </a>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarHeader>
+      )}
 
       <SidebarContent>
         <SidebarGroup>
@@ -217,6 +217,7 @@ export function AppSidebar() {
       <SidebarFooter>
         <NavUser user={user!} />
       </SidebarFooter>
+      <SidebarRail />
     </Sidebar>
   )
 }
