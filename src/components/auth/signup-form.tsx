@@ -11,11 +11,20 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useState } from 'react'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '../ui/select'
 
 export function SignUpForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'div'>) {
+  const [name, setName] = useState('')
+  const [role, setRole] = useState('student')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [repeatPassword, setRepeatPassword] = useState('')
@@ -37,7 +46,13 @@ export function SignUpForm({
     try {
       const { error } = await supabase.auth.signUp({
         email,
-        password
+        password,
+        options: {
+          data: {
+            role,
+            name: name || undefined
+          }
+        }
       })
       if (error) throw error
       setSuccess(true)
@@ -74,6 +89,34 @@ export function SignUpForm({
           <CardContent>
             <form onSubmit={handleSignUp}>
               <div className="flex flex-col gap-6">
+                <div className="grid gap-2">
+                  <Label htmlFor="role">Role</Label>
+                  <Select
+                    name="role"
+                    defaultValue="student"
+                    required
+                    value={role}
+                    onValueChange={(v) => setRole(v)}
+                  >
+                    <SelectTrigger id="role">
+                      <SelectValue placeholder="Select a role" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="student">student</SelectItem>
+                      <SelectItem value="instructor">instructor</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="name">Name</Label>
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder="your name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
                 <div className="grid gap-2">
                   <Label htmlFor="email">Email</Label>
                   <Input

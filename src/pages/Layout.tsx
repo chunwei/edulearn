@@ -4,18 +4,18 @@ import { AppSidebar } from '../components/layout/AppSidebar'
 import { useAuth } from '../contexts/AuthContext'
 import {
   SidebarProvider,
-  SidebarInset,
-  SidebarTrigger
+  SidebarInset
+  // SidebarTrigger
 } from '../components/ui/sidebar'
-import { Separator } from '@/components/ui/separator'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator
-} from '@/components/ui/breadcrumb'
+// import { Separator } from '@/components/ui/separator'
+// import {
+//   Breadcrumb,
+//   BreadcrumbItem,
+//   BreadcrumbLink,
+//   BreadcrumbList,
+//   BreadcrumbPage,
+//   BreadcrumbSeparator
+// } from '@/components/ui/breadcrumb'
 import { useLocation } from 'react-router-dom'
 
 interface LayoutProps {

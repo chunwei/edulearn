@@ -21,7 +21,7 @@ export function InstructorDashboard() {
               <p className="text-sm font-medium text-gray-500">
                 Total Students
               </p>
-              <p className="text-2xl font-bold text-gray-900">128</p>
+              <p className="text-2xl font-bold">128</p>
               <p className="text-xs text-green-600">+12% from last month</p>
             </div>
           </CardContent>
@@ -36,7 +36,7 @@ export function InstructorDashboard() {
               <p className="text-sm font-medium text-gray-500">
                 Active Courses
               </p>
-              <p className="text-2xl font-bold text-gray-900">5</p>
+              <p className="text-2xl font-bold">5</p>
               <p className="text-xs text-green-600">+1 new this month</p>
             </div>
           </CardContent>
@@ -51,7 +51,7 @@ export function InstructorDashboard() {
               <p className="text-sm font-medium text-gray-500">
                 Teaching Hours
               </p>
-              <p className="text-2xl font-bold text-gray-900">64</p>
+              <p className="text-2xl font-bold">64</p>
               <p className="text-xs text-green-600">+8 from last week</p>
             </div>
           </CardContent>
@@ -64,7 +64,7 @@ export function InstructorDashboard() {
             </div>
             <div>
               <p className="text-sm font-medium text-gray-500">Avg. Rating</p>
-              <p className="text-2xl font-bold text-gray-900">4.8</p>
+              <p className="text-2xl font-bold">4.8</p>
               <p className="text-xs text-green-600">+0.2 from last month</p>
             </div>
           </CardContent>
@@ -76,7 +76,7 @@ export function InstructorDashboard() {
           <Card>
             <CardContent>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-gray-900">
+                <h2 className="text-lg font-semibold">
                   Recent Student Activity
                 </h2>
                 <button className="text-sm text-blue-600 hover:text-blue-800">
@@ -88,7 +88,7 @@ export function InstructorDashboard() {
                 {[1, 2, 3, 4, 5].map((item) => (
                   <div
                     key={item}
-                    className="flex items-start space-x-3 p-3 border-b border-gray-100 last:border-0"
+                    className="flex items-start space-x-3 p-3 border-b last:border-0"
                   >
                     <img
                       src={`https://images.pexels.com/photos/${
@@ -100,15 +100,15 @@ export function InstructorDashboard() {
                       className="size-10 rounded-full"
                     />
                     <div>
-                      <p className="text-sm font-medium text-gray-900">
-                        Student {item}
-                      </p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-sm font-medium">Student {item}</p>
+                      <p className="text-xs text-muted-foreground">
                         {item % 2 === 0
                           ? `Completed lesson ${item} in Web Development Course`
                           : `Submitted assignment ${item} for review`}
                       </p>
-                      <p className="text-xs text-gray-400 mt-1">2 hours ago</p>
+                      <p className="text-xs text-muted-foreground/80 mt-1">
+                        2 hours ago
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -119,9 +119,7 @@ export function InstructorDashboard() {
           <Card className="mt-6">
             <CardContent>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-gray-900">
-                  Upcoming Classes
-                </h2>
+                <h2 className="text-lg font-semibold">Upcoming Classes</h2>
                 <button className="text-sm text-blue-600 hover:text-blue-800">
                   View Schedule
                 </button>
@@ -131,17 +129,17 @@ export function InstructorDashboard() {
                 {[1, 2, 3].map((item) => (
                   <div
                     key={item}
-                    className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200"
+                    className="flex items-center justify-between p-3 bg-accent rounded-lg border"
                   >
                     <div className="flex items-center space-x-3">
                       <div className="flex-shrink-0 w-2 h-10 bg-blue-500 rounded-full"></div>
                       <div>
-                        <p className="font-medium text-gray-900">
+                        <p className="font-medium">
                           {mockCourses[
                             item % mockCourses.length
                           ].title.substring(0, 30)}
                         </p>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-muted-foreground">
                           Module {item} - Introduction
                         </p>
                       </div>
@@ -150,7 +148,9 @@ export function InstructorDashboard() {
                       <p className="text-sm font-medium">
                         Today, {4 + item}:00 PM
                       </p>
-                      <p className="text-xs text-gray-500">45 minutes</p>
+                      <p className="text-xs text-muted-foreground">
+                        45 minutes
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -164,32 +164,36 @@ export function InstructorDashboard() {
 
           <Card>
             <CardContent>
-              <h2 className="text-lg font-semibold text-gray-900 mb-4">
-                Quick Actions
-              </h2>
+              <h2 className="text-lg font-semibold mb-4">Quick Actions</h2>
 
               <div className="grid grid-cols-2 gap-2">
                 <Link
                   to="/course/create"
-                  className="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                  className="flex flex-col items-center justify-center p-4 border  rounded-lg hover:bg-muted/50 transition-colors"
                 >
                   <BookOpen className="size-6 text-blue-600 mb-2" />
-                  <span className="text-sm text-gray-700">Create Course</span>
+                  <span className="text-sm text-secondary-foreground">
+                    Create Course
+                  </span>
                 </Link>
 
-                <button className="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                <button className="flex flex-col items-center justify-center p-4 border  rounded-lg hover:bg-muted/50 transition-colors">
                   <Users className="size-6 text-green-600 mb-2" />
-                  <span className="text-sm text-gray-700">Invite Students</span>
+                  <span className="text-sm text-secondary-foreground">
+                    Invite Students
+                  </span>
                 </button>
 
-                <button className="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                <button className="flex flex-col items-center justify-center p-4 border  rounded-lg hover:bg-muted/50 transition-colors">
                   <Clock className="size-6 text-amber-600 mb-2" />
-                  <span className="text-sm text-gray-700">Schedule Class</span>
+                  <span className="text-sm text-secondary-foreground">
+                    Schedule Class
+                  </span>
                 </button>
 
-                <button className="flex flex-col items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                <button className="flex flex-col items-center justify-center p-4 border rounded-lg hover:bg-muted/50 transition-colors">
                   <Award className="size-6 text-purple-600 mb-2" />
-                  <span className="text-sm text-gray-700">
+                  <span className="text-sm text-secondary-foreground">
                     Grade Assignments
                   </span>
                 </button>

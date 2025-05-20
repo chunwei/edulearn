@@ -34,7 +34,7 @@ export function LoginForm({
       })
       if (error) throw error
       // Update this route to redirect to an authenticated route. The user already has an active session.
-      location.href = '/protected'
+      location.href = '/dashboard'
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : 'An error occurred')
     } finally {
@@ -44,6 +44,15 @@ export function LoginForm({
 
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
+      <div className="space-y-2 mb-2">
+        <p className="text-sm ">Demo accounts:</p>
+        <div className="grid grid-cols-1 gap-1 text-xs text-muted-foreground">
+          <div>Student: john@example.com</div>
+          <div>Instructor: jane@example.com</div>
+          <div>Admin: admin@example.com</div>
+          <div>Password for all: pwd@2025</div>
+        </div>
+      </div>
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>

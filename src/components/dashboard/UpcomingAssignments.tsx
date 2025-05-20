@@ -27,34 +27,36 @@ export function UpcomingAssignments({ assignments }: UpcomingAssignmentsProps) {
   
   return (
     <Card>
-      <CardHeader className="bg-white">
+      <CardHeader>
         <div className="flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-900">Upcoming Assignments</h2>
-          <button className="text-sm text-blue-600 hover:text-blue-800">View All</button>
+          <h2 className="text-lg font-semibold">Upcoming Assignments</h2>
+          <button className="text-sm text-blue-600 hover:text-blue-800">
+            View All
+          </button>
         </div>
       </CardHeader>
-      
+
       <CardContent className="p-0">
         {assignments.length === 0 ? (
           <div className="text-center py-6">
-            <p className="text-gray-500">No upcoming assignments.</p>
+            <p className="text-muted-foreground">No upcoming assignments.</p>
           </div>
         ) : (
-          <ul className="divide-y divide-gray-200">
+          <ul className="divide-y divide-border">
             {assignments.map((assignment) => {
-              const daysLeft = getDaysRemaining(assignment.dueDate);
-              let statusColor = 'text-green-700 bg-green-100';
-              
+              const daysLeft = getDaysRemaining(assignment.dueDate)
+              let statusColor = 'text-green-700 bg-green-100'
+
               if (daysLeft < 0) {
-                statusColor = 'text-red-700 bg-red-100';
+                statusColor = 'text-red-700 bg-red-100'
               } else if (daysLeft <= 2) {
-                statusColor = 'text-amber-700 bg-amber-100';
+                statusColor = 'text-amber-700 bg-amber-100'
               }
-              
+
               return (
                 <li
                   key={assignment.id}
-                  className="p-4 hover:bg-gray-50 transition-colors"
+                  className="p-4 hover:bg-muted/50 transition-colors"
                 >
                   <div className="flex items-start space-x-3">
                     <div className="shrink-0">
@@ -65,7 +67,7 @@ export function UpcomingAssignments({ assignments }: UpcomingAssignmentsProps) {
 
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center justify-between">
-                        <p className="text-sm font-medium text-gray-900">
+                        <p className="text-sm font-medium">
                           {assignment.title}
                         </p>
                         <span
@@ -79,11 +81,11 @@ export function UpcomingAssignments({ assignments }: UpcomingAssignmentsProps) {
                         </span>
                       </div>
 
-                      <p className="text-sm text-gray-600 mt-1 line-clamp-1">
+                      <p className="text-sm text-muted-foreground mt-1 line-clamp-1">
                         {assignment.description}
                       </p>
 
-                      <div className="flex items-center mt-2 text-xs text-gray-500">
+                      <div className="flex items-center mt-2 text-xs text-muted-foreground">
                         <Calendar className="h-3 w-3 mr-1" />
                         <span>Due {formatDate(assignment.dueDate)}</span>
                         <span className="mx-2">•</span>
@@ -98,5 +100,5 @@ export function UpcomingAssignments({ assignments }: UpcomingAssignmentsProps) {
         )}
       </CardContent>
     </Card>
-  );
+  )
 }

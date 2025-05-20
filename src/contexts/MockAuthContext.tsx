@@ -28,11 +28,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       
       const foundUser = mockUsers.find(u => u.email === email);
       
-      if (foundUser && password === 'password') { // Simple check for demo
-        setUser(foundUser);
+      if (foundUser && password === 'pwd@2025') {
+        // Simple check for demo
+        setUser(foundUser)
         // 将用户信息保存到 localStorage
-        localStorage.setItem('authUser', JSON.stringify(foundUser));
-        return true;
+        localStorage.setItem('authUser', JSON.stringify(foundUser))
+        return true
       }
       
       return false;

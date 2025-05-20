@@ -30,27 +30,31 @@ export function StudentCoursesPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-800">My Enrolled Courses</h1>
-        <p className="text-lg text-gray-600">
+        <h1 className="text-4xl font-bold">My Enrolled Courses</h1>
+        <p className="text-lg text-muted-foreground">
           Continue your learning journey with the courses you are enrolled in.
         </p>
       </header>
 
       {enrolledCourses.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {enrolledCourses.map(course => (
-            <EnrolledCourseCard 
-                key={course.id} 
-                course={course} 
-                progress={Math.floor(Math.random() * 100)} // Random progress for demo
+          {enrolledCourses.map((course) => (
+            <EnrolledCourseCard
+              key={course.id}
+              course={course}
+              progress={Math.floor(Math.random() * 100)} // Random progress for demo
             />
           ))}
         </div>
       ) : (
         <div className="text-center py-12">
-          <BookOpen className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-gray-700 mb-2">No Courses Enrolled Yet</h3>
-          <p className="text-gray-500 mb-4">It looks like you haven't enrolled in any courses.</p>
+          <BookOpen className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+          <h3 className="text-xl font-semibold mb-2">
+            No Courses Enrolled Yet
+          </h3>
+          <p className="text-muted-foreground mb-4">
+            It looks like you haven't enrolled in any courses.
+          </p>
           <Link to="/courses">
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
               Explore Courses
@@ -59,5 +63,5 @@ export function StudentCoursesPage() {
         </div>
       )}
     </div>
-  );
+  )
 } 

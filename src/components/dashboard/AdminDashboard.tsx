@@ -2,8 +2,16 @@ import React from 'react';
 import { Users, BookOpen, GraduationCap, DollarSign } from 'lucide-react';
 import { DashboardHeader } from './DashboardHeader';
 import { Card, CardContent, CardHeader } from '../ui/card';
-import { AnnouncementsList } from './AnnouncementsList';
-import { mockAnnouncements } from '../../data/mockData';
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell
+} from '../ui/table'
+import { AnnouncementsList } from './AnnouncementsList'
+import { mockAnnouncements } from '../../data/mockData'
 
 export function AdminDashboard() {
   return (
@@ -17,8 +25,10 @@ export function AdminDashboard() {
               <Users className="size-6" />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-500">Total Users</p>
-              <p className="text-2xl font-bold text-gray-900">1,248</p>
+              <p className="text-sm font-medium text-muted-foreground">
+                Total Users
+              </p>
+              <p className="text-2xl font-bold ">1,248</p>
               <p className="text-xs text-green-600">+8% from last month</p>
             </div>
           </CardContent>
@@ -30,10 +40,10 @@ export function AdminDashboard() {
               <BookOpen className="size-6" />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-500">
+              <p className="text-sm font-medium text-muted-foreground">
                 Active Courses
               </p>
-              <p className="text-2xl font-bold text-gray-900">54</p>
+              <p className="text-2xl font-bold ">54</p>
               <p className="text-xs text-green-600">+3 new this month</p>
             </div>
           </CardContent>
@@ -45,8 +55,10 @@ export function AdminDashboard() {
               <GraduationCap className="size-6" />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-500">Enrollments</p>
-              <p className="text-2xl font-bold text-gray-900">875</p>
+              <p className="text-sm font-medium text-muted-foreground">
+                Enrollments
+              </p>
+              <p className="text-2xl font-bold ">875</p>
               <p className="text-xs text-green-600">+12% from last month</p>
             </div>
           </CardContent>
@@ -58,8 +70,10 @@ export function AdminDashboard() {
               <DollarSign className="size-6" />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-500">Revenue</p>
-              <p className="text-2xl font-bold text-gray-900">$12,450</p>
+              <p className="text-sm font-medium text-muted-foreground">
+                Revenue
+              </p>
+              <p className="text-2xl font-bold ">$12,450</p>
               <p className="text-xs text-green-600">+15% from last month</p>
             </div>
           </CardContent>
@@ -70,18 +84,16 @@ export function AdminDashboard() {
         <div className="lg:col-span-2">
           <Card>
             <CardHeader>
-              <h2 className="text-lg font-semibold text-gray-900">
-                Platform Analytics
-              </h2>
+              <h2 className="text-lg font-semibold ">Platform Analytics</h2>
             </CardHeader>
 
             <CardContent>
-              <div className="bg-gray-50 rounded-lg p-4 text-center mb-4">
-                <p className="text-gray-500 text-sm">
+              <div className="bg-accent rounded-lg p-4 text-center mb-4">
+                <p className="text-muted-foreground text-sm">
                   Analytics chart will be displayed here
                 </p>
-                <div className="h-64 mt-2 rounded-lg border border-dashed border-gray-300 flex items-center justify-center">
-                  <div className="text-gray-400">
+                <div className="h-64 mt-2 rounded-lg border border-dashed  flex items-center justify-center">
+                  <div className="text-muted-foreground">
                     <p className="font-medium">User Growth Trend</p>
                     <p className="text-xs mt-1">
                       Monthly active users over time
@@ -91,25 +103,27 @@ export function AdminDashboard() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="border border-gray-200 rounded-lg p-3">
-                  <p className="text-xs font-medium text-gray-500">New Users</p>
-                  <p className="text-xl font-bold text-gray-900">+124</p>
+                <div className="border  rounded-lg p-3">
+                  <p className="text-xs font-medium text-muted-foreground">
+                    New Users
+                  </p>
+                  <p className="text-xl font-bold ">+124</p>
                   <p className="text-xs text-green-600">+18% from last week</p>
                 </div>
 
-                <div className="border border-gray-200 rounded-lg p-3">
-                  <p className="text-xs font-medium text-gray-500">
+                <div className="border  rounded-lg p-3">
+                  <p className="text-xs font-medium text-muted-foreground">
                     Completion Rate
                   </p>
-                  <p className="text-xl font-bold text-gray-900">68%</p>
+                  <p className="text-xl font-bold ">68%</p>
                   <p className="text-xs text-green-600">+5% from last month</p>
                 </div>
 
-                <div className="border border-gray-200 rounded-lg p-3">
-                  <p className="text-xs font-medium text-gray-500">
+                <div className="border  rounded-lg p-3">
+                  <p className="text-xs font-medium text-muted-foreground">
                     Avg. Session
                   </p>
-                  <p className="text-xl font-bold text-gray-900">24m</p>
+                  <p className="text-xl font-bold ">24m</p>
                   <p className="text-xs text-green-600">+2m from last week</p>
                 </div>
               </div>
@@ -119,9 +133,7 @@ export function AdminDashboard() {
           <Card className="mt-6">
             <CardHeader>
               <div className="flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-gray-900">
-                  Recent Activity
-                </h2>
+                <h2 className="text-lg font-semibold ">Recent Activity</h2>
                 <button className="text-sm text-blue-600 hover:text-blue-800">
                   View All
                 </button>
@@ -130,67 +142,55 @@ export function AdminDashboard() {
 
             <CardContent className="p-0">
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        User
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Action
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Resource
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Time
-                      </th>
-                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Status
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>User</TableHead>
+                      <TableHead>Action</TableHead>
+                      <TableHead>Resource</TableHead>
+                      <TableHead>Time</TableHead>
+                      <TableHead className="text-right ">Status</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
                     {[1, 2, 3, 4, 5].map((item) => (
-                      <tr key={item} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap">
+                      <TableRow key={item}>
+                        <TableCell>
                           <div className="flex items-center">
-                            <div className="size-8 rounded-full bg-gray-200"></div>
+                            <div className="size-8 rounded-full bg-secondary"></div>
                             <div className="ml-3">
-                              <p className="text-sm font-medium text-gray-900">
-                                User {item}
-                              </p>
-                              <p className="text-xs text-gray-500">
+                              <p className="text-sm font-medium">User {item}</p>
+                              <p className="text-xs text-muted-foreground">
                                 user{item}@example.com
                               </p>
                             </div>
                           </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                        </TableCell>
+                        <TableCell className="text-secondary-foreground">
                           {item % 3 === 0
                             ? 'Created course'
                             : item % 3 === 1
                             ? 'Enrolled in course'
                             : 'Updated profile'}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                        </TableCell>
+                        <TableCell className="text-sm text-secondary-foreground">
                           {item % 3 === 0
                             ? 'Course #12'
                             : item % 3 === 1
                             ? 'Course #45'
                             : 'User settings'}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        </TableCell>
+                        <TableCell className="text-sm text-muted-foreground">
                           {item} hour{item !== 1 ? 's' : ''} ago
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right">
+                        </TableCell>
+                        <TableCell className="text-right">
                           <span
                             className={`px-2 py-1 text-xs font-medium rounded-full ${
                               item % 3 === 0
-                                ? 'bg-green-100 text-green-800'
+                                ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
                                 : item % 3 === 1
-                                ? 'bg-blue-100 text-blue-800'
-                                : 'bg-amber-100 text-amber-800'
+                                ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
+                                : 'bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300'
                             }`}
                           >
                             {item % 3 === 0
@@ -199,11 +199,11 @@ export function AdminDashboard() {
                               ? 'In Progress'
                               : 'Pending'}
                           </span>
-                        </td>
-                      </tr>
+                        </TableCell>
+                      </TableRow>
                     ))}
-                  </tbody>
-                </table>
+                  </TableBody>
+                </Table>
               </div>
             </CardContent>
           </Card>
@@ -214,13 +214,11 @@ export function AdminDashboard() {
 
           <Card>
             <CardHeader>
-              <h2 className="text-lg font-semibold text-gray-900">
-                Admin Tasks
-              </h2>
+              <h2 className="text-lg font-semibold ">Admin Tasks</h2>
             </CardHeader>
 
             <CardContent className="p-0">
-              <ul className="divide-y divide-gray-200">
+              <ul className="divide-y">
                 {[
                   'Review new instructor applications',
                   'Approve pending course submissions',
@@ -230,13 +228,15 @@ export function AdminDashboard() {
                 ].map((task, index) => (
                   <li
                     key={index}
-                    className="px-4 py-3 hover:bg-gray-50 flex items-center"
+                    className="px-4 py-3 hover:bg-muted/50 flex items-center"
                   >
                     <input
                       type="checkbox"
-                      className="size-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      className="size-4 text-blue-600 focus:ring-blue-500  rounded"
                     />
-                    <span className="ml-3 text-sm text-gray-700">{task}</span>
+                    <span className="ml-3 text-sm text-secondary-foreground">
+                      {task}
+                    </span>
 
                     {index === 0 && (
                       <span className="ml-auto text-xs font-medium text-red-700 bg-red-100 px-2 py-0.5 rounded-full">
