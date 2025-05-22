@@ -5,6 +5,7 @@ import { Course, Lesson } from '../types';
 import { CourseContent } from '../components/courses/CourseContent';
 import { LessonViewer } from '../components/courses/LessonViewer';
 import { mockCourses } from '../data/mockData';
+import { Button } from '@/components/ui/button'
 
 export function CoursePage() {
   const { courseId } = useParams<{ courseId: string }>();
@@ -38,18 +39,17 @@ export function CoursePage() {
   return (
     <div className="h-full flex">
       {/* Course content sidebar */}
-      <div className="w-80 border-r border-gray-200 flex flex-col">
-        <div className="p-4 border-b border-gray-200">
-          <button
+      <div className="w-80 border-r flex flex-col">
+        <div className="p-4 border-b ">
+          <Button
+            variant={'ghost'}
             onClick={() => navigate('/courses')}
-            className="flex items-center text-sm text-gray-500 hover:text-gray-700"
+            className="flex items-center text-sm text-muted-foreground"
           >
             <ArrowLeft className="size-4 mr-1" />
             Back to Courses
-          </button>
-          <h1 className="text-lg font-semibold text-gray-900 mt-2">
-            {course.title}
-          </h1>
+          </Button>
+          <h1 className="text-lg font-semibold  mt-2">{course.title}</h1>
         </div>
         <CourseContent
           course={course}
@@ -64,11 +64,13 @@ export function CoursePage() {
           <LessonViewer lesson={currentLesson} courseId={course.id} />
         ) : course.lessons.length > 0 ? (
           <div className="h-full flex items-center justify-center">
-            <p className="text-gray-500">Select a lesson to begin.</p>
+            <p className="text-muted-foreground">Select a lesson to begin.</p>
           </div>
         ) : (
           <div className="h-full flex items-center justify-center">
-            <p className="text-gray-500">This course has no lessons yet.</p>
+            <p className="text-muted-foreground0">
+              This course has no lessons yet.
+            </p>
           </div>
         )}
       </div>

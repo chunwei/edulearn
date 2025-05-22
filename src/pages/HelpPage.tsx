@@ -10,12 +10,12 @@ interface FAQItemProps {
 }
 
 const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
   return (
-    <div className="border-b border-gray-200 py-5">
+    <div className="border-b py-5">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex justify-between items-center w-full text-left text-gray-700 hover:text-blue-600 focus:outline-hidden"
+        className="flex justify-between items-center w-full text-left hover:text-blue-600 focus:outline-hidden"
       >
         <span className="font-semibold text-lg">{question}</span>
         {isOpen ? (
@@ -25,71 +25,92 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
         )}
       </button>
       {isOpen && (
-        <div className="mt-3 text-gray-600 leading-relaxed">{answer}</div>
+        <div className="mt-3 text-muted-foreground leading-relaxed">
+          {answer}
+        </div>
       )}
     </div>
   )
-};
+}
 
 const faqs = [
   {
-    question: "How do I enroll in a course?",
+    question: 'How do I enroll in a course?',
     answer: (
       <p>
-        You can enroll in courses by navigating to the <Link to="/courses" className="text-blue-600 hover:underline">Courses</Link> page, 
-        finding a course you're interested in, and clicking the "Enroll Now" button. Some courses may require payment.
+        You can enroll in courses by navigating to the{' '}
+        <Link to="/courses" className="text-blue-600 hover:underline">
+          Courses
+        </Link>{' '}
+        page, finding a course you're interested in, and clicking the "Enroll
+        Now" button. Some courses may require payment.
       </p>
     )
   },
   {
-    question: "How can I reset my password?",
+    question: 'How can I reset my password?',
     answer: (
       <p>
-        If you've forgotten your password, you can use the "Forgot Password" link on the <Link to="/login" className="text-blue-600 hover:underline">Login</Link> page. 
-        If you are logged in and want to change your password, go to the <Link to="/settings" className="text-blue-600 hover:underline">Settings</Link> page under Account Security.
+        If you've forgotten your password, you can use the "Forgot Password"
+        link on the{' '}
+        <Link to="/login" className="text-blue-600 hover:underline">
+          Login
+        </Link>{' '}
+        page. If you are logged in and want to change your password, go to the{' '}
+        <Link to="/settings" className="text-blue-600 hover:underline">
+          Settings
+        </Link>{' '}
+        page under Account Security.
       </p>
     )
   },
   {
-    question: "Where can I find my course materials?",
-    answer: "Once enrolled, you can access your course materials, including videos, documents, and assignments, from the course detail page or your My Courses dashboard."
+    question: 'Where can I find my course materials?',
+    answer:
+      'Once enrolled, you can access your course materials, including videos, documents, and assignments, from the course detail page or your My Courses dashboard.'
   },
   {
-    question: "How do I contact an instructor?",
+    question: 'How do I contact an instructor?',
     answer: (
-        <p>
-            You can contact your instructor through the <Link to="/messages" className="text-blue-600 hover:underline">Messages</Link> feature once you are enrolled in their course. 
-            Some instructors may also provide contact information within the course materials or announcements.
-        </p>
+      <p>
+        You can contact your instructor through the{' '}
+        <Link to="/messages" className="text-blue-600 hover:underline">
+          Messages
+        </Link>{' '}
+        feature once you are enrolled in their course. Some instructors may also
+        provide contact information within the course materials or
+        announcements.
+      </p>
     )
   },
   {
-    question: "What if I have a technical issue?",
-    answer: "For technical issues, please try clearing your browser cache and cookies first. If the problem persists, you can contact our support team through the contact form below or by emailing support@edulearn.example.com."
+    question: 'What if I have a technical issue?',
+    answer:
+      'For technical issues, please try clearing your browser cache and cookies first. If the problem persists, you can contact our support team through the contact form below or by emailing support@edulearn.example.com.'
   }
-];
+]
 
 export function HelpPage() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState('')
 
-  const filteredFaqs = faqs.filter(faq => 
-    faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (typeof faq.answer === 'string' && faq.answer.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  const filteredFaqs = faqs.filter(
+    (faq) =>
+      faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (typeof faq.answer === 'string' &&
+        faq.answer.toLowerCase().includes(searchTerm.toLowerCase()))
+  )
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
       <header className="text-center mb-12">
         <LifeBuoy className="h-16 w-16 text-blue-600 mx-auto mb-4" />
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-800">
-          Help Center
-        </h1>
-        <p className="text-xl text-gray-600 mt-3">
+        <h1 className="text-4xl md:text-5xl font-bold">Help Center</h1>
+        <p className="text-xl text-muted-foreground mt-3">
           We're here to help! Find answers to common questions or contact us.
         </p>
       </header>
 
-      <section className="mb-12 p-6 bg-white shadow-lg rounded-lg">
+      <section className="mb-12 p-6 bg-card shadow-lg rounded-lg">
         <div className="relative mb-8">
           <Input
             type="text"
@@ -105,43 +126,37 @@ export function HelpPage() {
             <FAQItem key={index} question={faq.question} answer={faq.answer} />
           ))
         ) : (
-          <p className="text-center text-gray-500 py-6">
+          <p className="text-center text-muted-foreground/80 py-6">
             No FAQs found matching your search term.
           </p>
         )}
       </section>
 
       <section className="grid md:grid-cols-3 gap-8 mb-12 text-center">
-        <div className="p-6 bg-gray-50 rounded-lg hover:shadow-md transition-shadow">
+        <div className="p-6 bg-accent/50 rounded-lg hover:shadow-md transition-shadow">
           <BookOpen className="size-10 text-blue-600 mx-auto mb-3" />
-          <h3 className="text-xl font-semibold text-gray-800 mb-2">
-            Browse Documentation
-          </h3>
-          <p className="text-gray-600 text-sm mb-3">
+          <h3 className="text-xl font-semibold mb-2">Browse Documentation</h3>
+          <p className="text-muted-foreground text-sm mb-3">
             Explore detailed guides and tutorials for using EduLearn.
           </p>
           <Button variant="outline" size="sm">
             View Docs (Soon)
           </Button>
         </div>
-        <div className="p-6 bg-gray-50 rounded-lg hover:shadow-md transition-shadow">
+        <div className="p-6 bg-accent/50 rounded-lg hover:shadow-md transition-shadow">
           <MessageSquare className="size-10 text-blue-600 mx-auto mb-3" />
-          <h3 className="text-xl font-semibold text-gray-800 mb-2">
-            Community Forum
-          </h3>
-          <p className="text-gray-600 text-sm mb-3">
+          <h3 className="text-xl font-semibold  mb-2">Community Forum</h3>
+          <p className="text-muted-foreground text-sm mb-3">
             Ask questions and share knowledge with other users.
           </p>
           <Button variant="outline" size="sm">
             <Link to="/discussion">Visit Forum</Link>
           </Button>
         </div>
-        <div className="p-6 bg-gray-50 rounded-lg hover:shadow-md transition-shadow">
+        <div className="p-6 bg-accent/50 rounded-lg hover:shadow-md transition-shadow">
           <LifeBuoy className="size-10 text-blue-600 mx-auto mb-3" />
-          <h3 className="text-xl font-semibold text-gray-800 mb-2">
-            Contact Support
-          </h3>
-          <p className="text-gray-600 text-sm mb-3">
+          <h3 className="text-xl font-semibold  mb-2">Contact Support</h3>
+          <p className="text-muted-foreground text-sm mb-3">
             Can't find what you need? Our support team is ready to assist.
           </p>
           <Button /*variant="default"*/ size="sm">Contact Us (Soon)</Button>

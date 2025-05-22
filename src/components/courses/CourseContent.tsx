@@ -15,7 +15,7 @@ export function CourseContent({ course, currentLesson, onSelectLesson }: CourseC
   
   return (
     <div className="flex flex-col h-full">
-      <div className="flex border-b border-gray-200">
+      <div className="flex border-b ">
         <button
           className={`px-4 py-2 text-sm font-medium ${
             activeTab === 'content'
@@ -46,7 +46,6 @@ export function CourseContent({ course, currentLesson, onSelectLesson }: CourseC
               className={`mb-3 ${
                 currentLesson?.id === lesson.id ? 'ring-2 ring-blue-500' : ''
               }`}
-              hoverable
               onClick={() => onSelectLesson(lesson)}
             >
               <CardContent className="p-4">
@@ -61,7 +60,7 @@ export function CourseContent({ course, currentLesson, onSelectLesson }: CourseC
 
                   <div className="flex-1">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-sm font-medium text-gray-900">
+                      <h3 className="text-sm font-medium">
                         {index + 1}. {lesson.title}
                       </h3>
                       {lesson.isComplete && (
@@ -83,9 +82,7 @@ export function CourseContent({ course, currentLesson, onSelectLesson }: CourseC
             {/* Discussion messages would go here */}
             <div className="text-center py-8">
               <MessageSquare className="h-12 w-12 text-gray-400 mx-auto mb-3" />
-              <h3 className="text-lg font-medium text-gray-900">
-                No messages yet
-              </h3>
+              <h3 className="text-lg font-medium">No messages yet</h3>
               <p className="text-sm text-gray-500 mt-1">
                 Be the first to start a discussion about this course
               </p>

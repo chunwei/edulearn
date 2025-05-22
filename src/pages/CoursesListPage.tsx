@@ -6,8 +6,8 @@ import { Course } from '../types'; // Corrected import for Course type
 import { Button } from '../components/ui/button'; // Corrected case
 import { Input } from '../components/ui/input'; // Corrected case
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select'; // Using new Select
-import { Search, Filter, LayoutGrid, List } from 'lucide-react';
-import { CourseCard } from '../components/courses/CourseCard'; // Using new CourseCard
+import { Search, Filter, LayoutGrid, List, PlusIcon } from 'lucide-react'
+import { CourseCard } from '../components/courses/CourseCard' // Using new CourseCard
 import {
   Card,
   CardContent,
@@ -16,6 +16,7 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { useAuth } from '@/contexts/AuthContext'
 
 // Placeholder for CourseCard component - should be created separately
 // const CourseCard: React.FC<{ course: Course }> = ({ course }) => (
@@ -25,7 +26,7 @@ import { Badge } from '@/components/ui/badge'
 // );
 
 export function CoursesListPage() {
-  // const { user } = useAuth(); // Removed unused variable
+  const { user } = useAuth()
   const [searchTerm, setSearchTerm] = React.useState('')
   const [categoryFilter, setCategoryFilter] = React.useState('all')
   const [levelFilter, setLevelFilter] = React.useState('all')
@@ -58,11 +59,30 @@ export function CoursesListPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-800 mb-2">
-          Explore Courses
-        </h1>
-        <p className="text-lg text-gray-600">
-          Find your next learning adventure from our extensive catalog.
+        <div className="flex items-center justify-between">
+          <h1 className="text-4xl font-bold mb-2">Explore Courses</h1>
+          {(user?.role === 'admin' || user?.role === 'instructor') && (
+            <Button asChild>
+              <Link to="/course/create">
+                <PlusIcon className="mr-2 h-4 w-4" />
+                Create Course
+              </Link>
+            </Button>
+          )}
+        </div>
+        <p className="text-lg text-muted-foreground">
+          {(() => {
+            switch (user?.role) {
+              case 'student':
+                return 'Find your next learning adventure from our extensive catalog and enhance your skills.'
+              case 'instructor':
+                return 'Explore courses to inspire your teaching and create compelling educational content.'
+              case 'admin':
+                return 'Monitor course offerings and ensure quality educational content across the platform.'
+              default:
+                return 'Find your next learning adventure from our extensive catalog.'
+            }
+          })()}
         </p>
       </header>
 
@@ -72,7 +92,7 @@ export function CoursesListPage() {
           <div className="lg:col-span-2">
             <label
               htmlFor="search"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-muted-foreground mb-1"
             >
               Search Courses
             </label>
@@ -93,7 +113,7 @@ export function CoursesListPage() {
           <div>
             <label
               htmlFor="category"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-muted-foreground mb-1"
             >
               Category
             </label>
@@ -123,7 +143,7 @@ export function CoursesListPage() {
           <div>
             <label
               htmlFor="level"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-muted-foreground mb-1"
             >
               Level
             </label>
@@ -157,7 +177,7 @@ export function CoursesListPage() {
           <div>
             <label
               htmlFor="sort"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-muted-foreground mb-1"
             >
               Sort By
             </label>
@@ -185,7 +205,7 @@ export function CoursesListPage() {
                 </select> */}
           </div>
           <div className="flex justify-end items-center space-x-2 pt-6">
-            <span className="text-sm text-gray-600">View:</span>
+            <span className="text-sm text-muted-foreground/80">View:</span>
             <Button
               variant={viewMode === 'grid' ? 'secondary' : 'ghost'}
               size="sm"

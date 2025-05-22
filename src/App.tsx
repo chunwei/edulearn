@@ -26,6 +26,9 @@ import { SignUp } from './pages/auth/SignUp'
 import { AuthLayout } from './components/layout/AuthLayout'
 import { ForgotPassword } from './pages/auth/ForgotPassword'
 import { UpdatePassword } from './pages/auth/UpdatePassword'
+import ProgressPage from './pages/ProgressPage'
+import CertificatesPage from './pages/CertificatesPage'
+import CertificateTemplateCreatePage from './pages/CertificateCreator'
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   // 使用新的 hook
@@ -79,6 +82,30 @@ function AppContent() {
           element={
             <ProtectedRoute>
               <CoursesListPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/progress"
+          element={
+            <ProtectedRoute>
+              <ProgressPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/certificates"
+          element={
+            <ProtectedRoute>
+              <CertificatesPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/certificates/create"
+          element={
+            <ProtectedRoute>
+              <CertificateTemplateCreatePage />
             </ProtectedRoute>
           }
         />

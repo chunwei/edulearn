@@ -30,34 +30,66 @@ interface EventModalProps {
   isNew?: boolean;
 }
 
-const EventModal: React.FC<EventModalProps> = ({ event, isOpen, onClose, onSave, isNew }) => {
-  const [title, setTitle] = useState(event?.title || '');
-  const [start, setStart] = useState(event?.start ? new Date(event.start).toISOString().substring(0, 16) : new Date().toISOString().substring(0, 16));
-  const [end, setEnd] = useState(event?.end ? new Date(event.end).toISOString().substring(0, 16) : new Date(new Date().getTime() + 60*60*1000).toISOString().substring(0,16));
-  const [description, setDescription] = useState(event?.description || '');
-  const [type, setType] = useState<MyCalendarEventType['type']>(event?.type || 'personal');
-  const [allDay, setAllDay] = useState(event?.allDay || false);
+const EventModal: React.FC<EventModalProps> = ({
+  event,
+  isOpen,
+  onClose,
+  onSave,
+  isNew
+}) => {
+  const [title, setTitle] = useState(event?.title || '')
+  const [start, setStart] = useState(
+    event?.start
+      ? new Date(event.start).toISOString().substring(0, 16)
+      : new Date().toISOString().substring(0, 16)
+  )
+  const [end, setEnd] = useState(
+    event?.end
+      ? new Date(event.end).toISOString().substring(0, 16)
+      : new Date(new Date().getTime() + 60 * 60 * 1000)
+          .toISOString()
+          .substring(0, 16)
+  )
+  const [description, setDescription] = useState(event?.description || '')
+  const [type, setType] = useState<MyCalendarEventType['type']>(
+    event?.type || 'personal'
+  )
+  const [allDay, setAllDay] = useState(event?.allDay || false)
 
   useEffect(() => {
     if (event) {
-      setTitle(event.title || '');
-      setStart(event.start ? new Date(event.start).toISOString().substring(0, 16) : new Date().toISOString().substring(0, 16));
-      setEnd(event.end ? new Date(event.end).toISOString().substring(0, 16) : new Date(new Date().getTime() + 60*60*1000).toISOString().substring(0,16));
-      setDescription(event.description || '');
-      setType(event.type || 'personal');
-      setAllDay(event.allDay || false);
+      setTitle(event.title || '')
+      setStart(
+        event.start
+          ? new Date(event.start).toISOString().substring(0, 16)
+          : new Date().toISOString().substring(0, 16)
+      )
+      setEnd(
+        event.end
+          ? new Date(event.end).toISOString().substring(0, 16)
+          : new Date(new Date().getTime() + 60 * 60 * 1000)
+              .toISOString()
+              .substring(0, 16)
+      )
+      setDescription(event.description || '')
+      setType(event.type || 'personal')
+      setAllDay(event.allDay || false)
     } else {
       // Reset for new event
-      setTitle('');
-      setStart(new Date().toISOString().substring(0, 16));
-      setEnd(new Date(new Date().getTime() + 60*60*1000).toISOString().substring(0,16));
-      setDescription('');
-      setType('personal');
-      setAllDay(false);
+      setTitle('')
+      setStart(new Date().toISOString().substring(0, 16))
+      setEnd(
+        new Date(new Date().getTime() + 60 * 60 * 1000)
+          .toISOString()
+          .substring(0, 16)
+      )
+      setDescription('')
+      setType('personal')
+      setAllDay(false)
     }
-  }, [event, isOpen]);
+  }, [event, isOpen])
 
-  if (!isOpen) return null;
+  if (!isOpen) return null
 
   const handleSubmit = () => {
     const newEventData: MyCalendarEventType = {
@@ -67,16 +99,16 @@ const EventModal: React.FC<EventModalProps> = ({ event, isOpen, onClose, onSave,
       end: new Date(end).toISOString(),
       description,
       type,
-      allDay,
+      allDay
       // courseId and userId would need to be set if applicable, perhaps via more fields in modal
-    };
-    onSave(newEventData);
-    onClose();
-  };
+    }
+    onSave(newEventData)
+    onClose()
+  }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+    <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+      <div className="p-6 rounded-lg shadow-xl w-full max-w-md">
         <h2 className="text-2xl font-semibold mb-4">
           {isNew ? 'Add New Event' : 'Edit Event'}
         </h2>
@@ -93,7 +125,7 @@ const EventModal: React.FC<EventModalProps> = ({ event, isOpen, onClose, onSave,
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              className="mt-1 block w-full border rounded-md shadow-sm p-2"
             />
           </div>
           <div>
@@ -108,7 +140,7 @@ const EventModal: React.FC<EventModalProps> = ({ event, isOpen, onClose, onSave,
               id="start"
               value={start}
               onChange={(e) => setStart(e.target.value)}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              className="mt-1 block w-full border  rounded-md shadow-sm p-2"
               disabled={allDay}
             />
           </div>
@@ -124,7 +156,7 @@ const EventModal: React.FC<EventModalProps> = ({ event, isOpen, onClose, onSave,
               id="end"
               value={end}
               onChange={(e) => setEnd(e.target.value)}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              className="mt-1 block w-full border  rounded-md shadow-sm p-2"
               disabled={allDay}
             />
           </div>
@@ -134,7 +166,7 @@ const EventModal: React.FC<EventModalProps> = ({ event, isOpen, onClose, onSave,
               id="allDay"
               checked={allDay}
               onChange={(e) => setAllDay(e.target.checked)}
-              className="size-4 text-blue-600 border-gray-300 rounded"
+              className="size-4 text-blue-600  rounded"
             />
             <label
               htmlFor="allDay"
@@ -156,7 +188,7 @@ const EventModal: React.FC<EventModalProps> = ({ event, isOpen, onClose, onSave,
               onChange={(e) =>
                 setType(e.target.value as MyCalendarEventType['type'])
               }
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              className="mt-1 block w-full border  rounded-md shadow-sm p-2"
             >
               <option value="personal">Personal</option>
               <option value="live-class">Live Class</option>
@@ -178,7 +210,7 @@ const EventModal: React.FC<EventModalProps> = ({ event, isOpen, onClose, onSave,
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              className="mt-1 block w-full border  rounded-md shadow-sm p-2"
             ></textarea>
           </div>
         </div>
@@ -191,81 +223,104 @@ const EventModal: React.FC<EventModalProps> = ({ event, isOpen, onClose, onSave,
       </div>
     </div>
   )
-};
+}
 
 export function CalendarPage() {
-  const { user: authUser } = useAuth();
-  const [events, setEvents] = useState<MyCalendarEventType[]>([]);
-  const [selectedEvent, setSelectedEvent] = useState<MyCalendarEventType | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isNewEvent, setIsNewEvent] = useState(false);
-  const [currentView, setCurrentView] = useState<View>('month');
+  const { user: authUser } = useAuth()
+  const [events, setEvents] = useState<MyCalendarEventType[]>([])
+  const [selectedEvent, setSelectedEvent] =
+    useState<MyCalendarEventType | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isNewEvent, setIsNewEvent] = useState(false)
+  const [currentView, setCurrentView] = useState<View>('month')
 
   useEffect(() => {
     // Filter events for the logged-in user or show all public/course events
     // This is a simplified example; a real app would have more complex logic
     if (authUser) {
-        const userEvents = mockCalendarEvents.filter(event => 
-            event.userId === authUser.id || // Events specific to the user
-            !event.userId || // Public events or general course events not tied to a specific user for creation
-            (event.type === 'live-class' || event.type === 'assignment-due') // Show all academic events for now
-        );
-        setEvents(userEvents);
+      const userEvents = mockCalendarEvents.filter(
+        (event) =>
+          event.userId === authUser.id || // Events specific to the user
+          !event.userId || // Public events or general course events not tied to a specific user for creation
+          event.type === 'live-class' ||
+          event.type === 'assignment-due' // Show all academic events for now
+      )
+      setEvents(userEvents)
     } else {
-        // Show only public events if no user is logged in (e.g., holidays)
-        setEvents(mockCalendarEvents.filter(event => !event.userId && event.type === 'holiday'));
+      // Show only public events if no user is logged in (e.g., holidays)
+      setEvents(
+        mockCalendarEvents.filter(
+          (event) => !event.userId && event.type === 'holiday'
+        )
+      )
     }
-  }, [authUser]);
+  }, [authUser])
 
   const handleSelectEvent = (event: MyCalendarEventType) => {
-    setSelectedEvent(event);
-    setIsNewEvent(false);
-    setIsModalOpen(true);
-  };
+    setSelectedEvent(event)
+    setIsNewEvent(false)
+    setIsModalOpen(true)
+  }
 
-  const handleSelectSlot = (slotInfo: { start: Date, end: Date, action: 'select' | 'click' | 'doubleClick' }) => {
-    if (slotInfo.action === 'doubleClick' || slotInfo.action === 'select') { 
-        setSelectedEvent({
-            id: ``, // Will be generated on save
-            title: '',
-            start: slotInfo.start.toISOString(),
-            end: slotInfo.end.toISOString(),
-            type: 'personal',
-        });
-        setIsNewEvent(true);
-        setIsModalOpen(true);
+  const handleSelectSlot = (slotInfo: {
+    start: Date
+    end: Date
+    action: 'select' | 'click' | 'doubleClick'
+  }) => {
+    if (slotInfo.action === 'doubleClick' || slotInfo.action === 'select') {
+      setSelectedEvent({
+        id: ``, // Will be generated on save
+        title: '',
+        start: slotInfo.start.toISOString(),
+        end: slotInfo.end.toISOString(),
+        type: 'personal'
+      })
+      setIsNewEvent(true)
+      setIsModalOpen(true)
     }
-  };
-  
+  }
+
   const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedEvent(null);
-  };
+    setIsModalOpen(false)
+    setSelectedEvent(null)
+  }
 
   const saveEvent = (eventData: MyCalendarEventType) => {
     if (isNewEvent) {
-      setEvents(prevEvents => [...prevEvents, { ...eventData, id: `evt-${Date.now()}-${Math.random()}` }]);
+      setEvents((prevEvents) => [
+        ...prevEvents,
+        { ...eventData, id: `evt-${Date.now()}-${Math.random()}` }
+      ])
     } else {
-      setEvents(prevEvents => prevEvents.map(ev => ev.id === eventData.id ? eventData : ev));
+      setEvents((prevEvents) =>
+        prevEvents.map((ev) => (ev.id === eventData.id ? eventData : ev))
+      )
     }
     // In a real app, you would also send this to a backend API
-  };
+  }
 
   const eventStyleGetter = (event: MyCalendarEventType) => {
     const style = {
-        backgroundColor: event.color || (event.type === 'live-class' ? '#3174ad' : event.type === 'assignment-due' ? '#ff9f89' : '#4caf50'),
-        borderRadius: '5px',
-        opacity: 0.8,
-        color: 'white',
-        border: '0px',
-        display: 'block'
-    };
+      backgroundColor:
+        event.color ||
+        (event.type === 'live-class'
+          ? '#3174ad'
+          : event.type === 'assignment-due'
+          ? '#ff9f89'
+          : '#4caf50'),
+      borderRadius: '5px',
+      opacity: 0.8,
+      color: 'white',
+      border: '0px',
+      display: 'block'
+    }
     return {
-        style: style
-    };
-  };
+      style: style
+    }
+  }
 
-  if (!authUser && currentView !== 'month') { // Limit views if not logged in, or handle differently
+  if (!authUser && currentView !== 'month') {
+    // Limit views if not logged in, or handle differently
     // Optionally, redirect to login or show a restricted view
   }
 
@@ -273,8 +328,8 @@ export function CalendarPage() {
     <div className="container mx-auto px-4 py-8">
       <header className="mb-6 flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">Calendar</h1>
-          <p className="text-md text-gray-600">
+          <h1 className="text-3xl font-bold ">Calendar</h1>
+          <p className="text-md text-muted-foreground">
             Manage your schedule, deadlines, and important events.
           </p>
         </div>
@@ -305,7 +360,7 @@ export function CalendarPage() {
         </div>
       )}
 
-      <div className="bg-white p-2 sm:p-4 rounded-lg shadow h-[70vh] min-h-[600px]">
+      <div className="p-2 sm:p-4 rounded-lg shadow h-[70vh] min-h-[600px]">
         <Calendar
           localizer={localizer}
           events={events.map((e) => ({

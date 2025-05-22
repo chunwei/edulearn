@@ -12,12 +12,14 @@ export function InstructorCoursesPage() {
 
   const currentUser = useMemo(() => {
     if (!authUser) return null;
-    return mockUsers.find(u => u.id === authUser.id);
+    return mockUsers.find((u) => u.email === authUser.email)
   }, [authUser]);
 
   useEffect(() => {
     if (authUser && currentUser && currentUser.role === 'instructor') {
-      setTaughtCourses(mockCourses.filter(c => c.instructor.id === currentUser.id));
+      setTaughtCourses(
+        mockCourses.filter((c) => c.instructor.email === currentUser.email)
+      )
     }
   }, [authUser, currentUser]);
 

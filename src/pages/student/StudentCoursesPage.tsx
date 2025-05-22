@@ -12,18 +12,18 @@ export function StudentCoursesPage() {
 
   const currentUser = useMemo(() => {
     if (!authUser) return null;
-    return mockUsers.find(u => u.id === authUser.id);
+    return mockUsers.find((u) => u.email === authUser.email)
   }, [authUser]);
 
   useEffect(() => {
     if (authUser && currentUser && currentUser.role === 'student') {
-      let studentCourses: Course[] = [];
+      let studentCourses: Course[] = []
       // SIMULATED: In a real app, authUser might have enrolledCourseIds or you'd fetch them.
-      if (authUser.id === '1') { // John Doe
-        studentCourses = mockCourses.filter(c => c.id === '1' || c.id === '2');
-      }
+      // if (authUser.id === '1') { // John Doe
+      studentCourses = mockCourses.filter((c) => c.id === '1' || c.id === '2')
+      // }
       // For other demo students, or if no specific logic, show no courses for now
-      setEnrolledCourses(studentCourses);
+      setEnrolledCourses(studentCourses)
     }
   }, [authUser, currentUser]);
 

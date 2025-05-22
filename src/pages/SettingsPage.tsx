@@ -85,23 +85,23 @@ export function SettingsPage() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-3xl">
       <header className="mb-10">
-        <h1 className="text-4xl font-bold text-gray-800">Settings</h1>
-        <p className="text-lg text-gray-600">
+        <h1 className="text-4xl font-bold ">Settings</h1>
+        <p className="text-lg text-muted-foreground">
           Manage your account preferences and security settings.
         </p>
       </header>
 
       {/* General Settings Section */}
-      <section className="mb-10 p-6 bg-white shadow-lg rounded-lg">
-        <h2 className="text-2xl font-semibold text-gray-700 mb-6 border-b pb-3 flex items-center">
+      <section className="mb-10 p-6 bg-card shadow-lg rounded-lg">
+        <h2 className="text-2xl font-semibold  mb-6 border-b pb-3 flex items-center">
           <Bell className="mr-3 size-6 text-blue-600" /> Notification
           Preferences
         </h2>
         <div className="space-y-5">
           <div className="flex items-center justify-between">
-            <label htmlFor="emailNotifications" className="text-gray-700">
+            <label htmlFor="emailNotifications" className="">
               Email Notifications
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-muted-foreground">
                 Receive important updates via email.
               </p>
             </label>
@@ -115,9 +115,9 @@ export function SettingsPage() {
           </div>
           {/* Add SMS and Push notifications similarly if Switch component is available */}
           <div className="flex items-center justify-between">
-            <label htmlFor="pushNotifications" className="text-gray-700">
+            <label htmlFor="pushNotifications" className="">
               Push Notifications
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-muted-foreground">
                 Get real-time alerts on your device. (Requires App)
               </p>
             </label>
@@ -133,16 +133,13 @@ export function SettingsPage() {
       </section>
 
       {/* Appearance Settings */}
-      <section className="mb-10 p-6 bg-white shadow-lg rounded-lg">
-        <h2 className="text-2xl font-semibold text-gray-700 mb-6 border-b pb-3 flex items-center">
+      <section className="mb-10 p-6 bg-card shadow-lg rounded-lg">
+        <h2 className="text-2xl font-semibold  mb-6 border-b pb-3 flex items-center">
           <Palette className="mr-3 size-6 text-purple-600" /> Appearance
         </h2>
         <div className="space-y-5">
           <div>
-            <label
-              htmlFor="theme"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
+            <label htmlFor="theme" className="block text-sm font-medium  mb-1">
               Theme
             </label>
             <Select
@@ -166,7 +163,7 @@ export function SettingsPage() {
           <div>
             <label
               htmlFor="language"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium  mb-1"
             >
               Language
             </label>
@@ -192,8 +189,8 @@ export function SettingsPage() {
       </section>
 
       {/* Security Settings Section */}
-      <section className="mb-10 p-6 bg-white shadow-lg rounded-lg">
-        <h2 className="text-2xl font-semibold text-gray-700 mb-6 border-b pb-3 flex items-center">
+      <section className="mb-10 p-6 bg-card shadow-lg rounded-lg">
+        <h2 className="text-2xl font-semibold  mb-6 border-b pb-3 flex items-center">
           <ShieldCheck className="mr-3 size-6 text-green-600" /> Account
           Security
         </h2>
@@ -201,7 +198,7 @@ export function SettingsPage() {
           <div>
             <label
               htmlFor="currentPassword"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium "
             >
               Current Password
             </label>
@@ -215,10 +212,7 @@ export function SettingsPage() {
             />
           </div>
           <div>
-            <label
-              htmlFor="newPassword"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="newPassword" className="block text-sm font-medium ">
               New Password
             </label>
             <Input
@@ -233,7 +227,7 @@ export function SettingsPage() {
           <div>
             <label
               htmlFor="confirmPassword"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium "
             >
               Confirm New Password
             </label>
@@ -258,9 +252,9 @@ export function SettingsPage() {
         </form>
         <div className="mt-6 pt-6 border-t">
           <div className="flex items-center justify-between">
-            <label htmlFor="twoFactorEnabled" className="text-gray-700">
+            <label htmlFor="twoFactorEnabled" className="">
               Two-Factor Authentication (2FA)
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-muted-foreground">
                 Enhance your account security.
               </p>
             </label>
@@ -277,7 +271,7 @@ export function SettingsPage() {
 
       <div className="mt-12 text-center">
         <Button
-          variant="danger"
+          variant="destructive"
           onClick={logout}
           className="flex items-center mx-auto"
         >

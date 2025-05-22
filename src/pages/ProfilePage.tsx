@@ -21,7 +21,7 @@ export function ProfilePage() {
 
   useEffect(() => {
     if (authUser) {
-      const foundUser = mockUsers.find(u => u.id === authUser.id);
+      const foundUser = mockUsers.find((u) => u.email === authUser.email)
       if (foundUser) {
         setProfileUser(foundUser);
         setName(foundUser.name);
@@ -34,11 +34,15 @@ export function ProfilePage() {
           // Or, if you adapt mockData to have enrolledCourseIds on User:
           // const enrolled_ids = (foundUser as any).enrolledCourseIds || [];
           // setUserAssociatedCourses(mockCourses.filter(c => enrolled_ids.includes(c.id)));
-          if (foundUser.id === '1') { // John Doe from mockData
-            setUserAssociatedCourses(mockCourses.filter(c => c.id === '1' || c.id === '2'));
-          }
+          // if (foundUser.id === '1') { // John Doe from mockData
+          setUserAssociatedCourses(
+            mockCourses.filter((c) => c.id === '1' || c.id === '2')
+          )
+          // }
         } else if (foundUser.role === 'instructor') {
-          setUserAssociatedCourses(mockCourses.filter(c => c.instructor.id === foundUser.id));
+          setUserAssociatedCourses(
+            mockCourses.filter((c) => c.instructor.email === foundUser.email)
+          )
         }
 
       } else {
@@ -59,7 +63,7 @@ export function ProfilePage() {
 
     // In a real app, send to backend API
     // For mock: update mockUsers array
-    const userIndex = mockUsers.findIndex(u => u.id === updatedUser.id);
+    const userIndex = mockUsers.findIndex((u) => u.email === updatedUser.email)
     if (userIndex !== -1) {
       mockUsers[userIndex] = updatedUser;
     }
