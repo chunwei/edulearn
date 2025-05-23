@@ -12,7 +12,8 @@ import {
   HelpCircle,
   GraduationCap,
   TrendingUpIcon,
-  Award
+  Award,
+  LandPlot
 } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
 import {
@@ -98,6 +99,14 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
 
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <Link to={`/${userRole}/exams`}>
+                      <LandPlot size={18} />
+                      <span>Examimations</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
                     <Link to="/calendar">

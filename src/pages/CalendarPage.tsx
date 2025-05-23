@@ -108,7 +108,7 @@ const EventModal: React.FC<EventModalProps> = ({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-      <div className="p-6 rounded-lg shadow-xl w-full max-w-md">
+      <div className="bg-card p-6 rounded-lg shadow-xl w-full max-w-md">
         <h2 className="text-2xl font-semibold mb-4">
           {isNew ? 'Add New Event' : 'Edit Event'}
         </h2>

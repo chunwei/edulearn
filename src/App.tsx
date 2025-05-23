@@ -29,6 +29,8 @@ import { UpdatePassword } from './pages/auth/UpdatePassword'
 import ProgressPage from './pages/ProgressPage'
 import CertificatesPage from './pages/CertificatesPage'
 import CertificateTemplateCreatePage from './pages/CertificateCreator'
+import { ExamsListPage } from './pages/student/ExamsListPage'
+import { ExamResultsPage } from './pages/student/ExamResultsPage'
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   // 使用新的 hook
@@ -171,6 +173,22 @@ function AppContent() {
           element={
             <ProtectedRoute>
               <CourseCreator />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/student/exams"
+          element={
+            <ProtectedRoute>
+              <ExamsListPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/student/exams/results/:examId"
+          element={
+            <ProtectedRoute>
+              <ExamResultsPage />
             </ProtectedRoute>
           }
         />
