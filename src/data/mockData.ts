@@ -408,6 +408,14 @@ export const mockExamResults = [
     feedback: {
       q4: '答案基本正确，但缺少了对各部分作用的详细说明',
       q5: '回答全面，很好地解释了响应式设计的概念和实现方法'
+    },
+    questionScores: {
+      q1: 10,
+      q2: 10,
+      q3: 10,
+      q4: 15,
+      q5: 40
     }
   }
 ]
+export type ExamResult = (typeof mockExamResults)[0]

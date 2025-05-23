@@ -31,6 +31,8 @@ import CertificatesPage from './pages/CertificatesPage'
 import CertificateTemplateCreatePage from './pages/CertificateCreator'
 import { ExamsListPage } from './pages/student/ExamsListPage'
 import { ExamResultsPage } from './pages/student/ExamResultsPage'
+import { InstructorExamGradePage } from './pages/instructor/InstructorExamGradePage'
+import { InstructorExamsListPage } from './pages/instructor/InstructorExamsListPage'
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   // 使用新的 hook
@@ -197,6 +199,22 @@ function AppContent() {
           element={
             <ProtectedRoute>
               <AssignmentSubmission />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/instructor/exams"
+          element={
+            <ProtectedRoute>
+              <InstructorExamsListPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/instructor/exams/grade/:examId"
+          element={
+            <ProtectedRoute>
+              <InstructorExamGradePage />
             </ProtectedRoute>
           }
         />
