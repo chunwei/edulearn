@@ -1,0 +1,124 @@
+/* 日历暗黑模式样式覆盖 */
+.dark .rbc-calendar {
+    background-color: var(--card);
+    color: var(--card-foreground);
+}
+
+/* 头部工具栏 */
+.dark .rbc-toolbar {
+    background-color: var(--card);
+    color: var(--card-foreground);
+}
+
+.dark .rbc-toolbar button {
+    color: var(--card-foreground);
+    border-color: var(--border);
+}
+
+.dark .rbc-toolbar button:hover {
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+}
+
+.dark .rbc-toolbar button:active,
+.rbc-toolbar button:focus,
+.rbc-toolbar button.rbc-active {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+}
+
+/* 月视图 */
+.dark .rbc-month-view {
+    border-color: var(--border);
+}
+
+.dark .rbc-month-row {
+    border-color: var(--border);
+}
+
+.dark .rbc-day-bg {
+    background-color: var(--card);
+    border-color: var(--border);
+}
+
+.dark .rbc-today {
+    background-color: var(--accent);
+}
+
+.dark .rbc-day-bg.rbc-today {
+    background-color: var(--accent);
+}
+
+.dark .rbc-off-range-bg {
+    background-color: var(--muted);
+}
+
+.dark .rbc-date-cell {
+    color: var(--card-foreground);
+}
+
+.dark .rbc-date-cell.rbc-now {
+    color: var(--accent-foreground);
+}
+
+/* 周/日视图 */
+.dark .rbc-time-view {
+    border-color: var(--border);
+}
+
+.dark .rbc-time-header {
+    border-color: var(--border);
+}
+
+.dark .rbc-time-header-content {
+    border-color: var(--border);
+}
+
+.dark .rbc-time-content {
+    border-color: var(--border);
+}
+
+.dark .rbc-time-slot {
+    border-color: var(--border);
+    color: var(--muted-foreground);
+}
+
+.rbc-timeslot-group {
+    border-bottom-color: var(--border);
+}
+
+.dark .rbc-time-content>*+*>* {
+    border-left-color: var(--border);
+}
+
+.dark .rbc-time-gutter {
+    color: var(--card-foreground);
+}
+
+.dark .rbc-header {
+    border-color: var(--border);
+    color: var(--card-foreground);
+}
+
+/* 事件样式 */
+.dark .rbc-event {
+    /* 事件样式已经在 eventStyleGetter 中定义，可以保持不变 */
+    border-color: var(--border);
+}
+
+.dark .rbc-event.rbc-selected {
+    outline-color: var(--ring);
+}
+
+/* AgentView 样式 */
+.dark .rbc-agenda-view table.rbc-agenda-table {
+    border-color: var(--border);
+}
+
+.dark .rbc-agenda-view table.rbc-agenda-table thead>tr>th {
+    border-bottom-color: var(--border);
+}
+
+.dark .rbc-agenda-view table.rbc-agenda-table tbody>tr>td+td {
+    border-left-color: var(--border);
+}

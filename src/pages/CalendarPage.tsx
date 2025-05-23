@@ -3,6 +3,7 @@ import { Calendar, dateFnsLocalizer, View } from 'react-big-calendar';
 import { format, parse, startOfWeek, getDay } from 'date-fns';
 import { enUS } from 'date-fns/locale/en-US';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import '../styles/calendar-dark-mode.css';
 import { mockCalendarEvents } from '../data/mockData';
 import { CalendarEvent as MyCalendarEventType } from '../types';
 import { useAuth } from '../contexts/AuthContext';
@@ -19,8 +20,19 @@ const localizer = dateFnsLocalizer({
   parse,
   startOfWeek,
   getDay,
-  locales,
+  locales
 });
+
+// 定义Calendar组件期望的事件类型
+interface CalendarEventData {
+  id: string;
+  title: string;
+  start: Date;
+  end: Date;
+  allDay?: boolean;
+  description?: string;
+  type: MyCalendarEventType['type'];
+}
 
 interface EventModalProps {
   event: MyCalendarEventType | null;
@@ -37,59 +49,58 @@ const EventModal: React.FC<EventModalProps> = ({
   onSave,
   isNew
 }) => {
-  const [title, setTitle] = useState(event?.title || '')
+  const [title, setTitle] = useState(event?.title || '');
   const [start, setStart] = useState(
     event?.start
       ? new Date(event.start).toISOString().substring(0, 16)
       : new Date().toISOString().substring(0, 16)
-  )
+  );
   const [end, setEnd] = useState(
     event?.end
       ? new Date(event.end).toISOString().substring(0, 16)
       : new Date(new Date().getTime() + 60 * 60 * 1000)
           .toISOString()
           .substring(0, 16)
-  )
-  const [description, setDescription] = useState(event?.description || '')
+  );
+  const [description, setDescription] = useState(event?.description || '');
   const [type, setType] = useState<MyCalendarEventType['type']>(
     event?.type || 'personal'
-  )
-  const [allDay, setAllDay] = useState(event?.allDay || false)
+  );
+  const [allDay, setAllDay] = useState(event?.allDay || false);
 
   useEffect(() => {
     if (event) {
-      setTitle(event.title || '')
+      setTitle(event.title || '');
       setStart(
         event.start
           ? new Date(event.start).toISOString().substring(0, 16)
           : new Date().toISOString().substring(0, 16)
-      )
+      );
       setEnd(
         event.end
           ? new Date(event.end).toISOString().substring(0, 16)
           : new Date(new Date().getTime() + 60 * 60 * 1000)
               .toISOString()
               .substring(0, 16)
-      )
-      setDescription(event.description || '')
-      setType(event.type || 'personal')
-      setAllDay(event.allDay || false)
+      );
+      setDescription(event.description || '');
+      setType(event.type || 'personal');
+      setAllDay(event.allDay || false);
     } else {
-      // Reset for new event
-      setTitle('')
-      setStart(new Date().toISOString().substring(0, 16))
+      setTitle('');
+      setStart(new Date().toISOString().substring(0, 16));
       setEnd(
         new Date(new Date().getTime() + 60 * 60 * 1000)
           .toISOString()
           .substring(0, 16)
-      )
-      setDescription('')
-      setType('personal')
-      setAllDay(false)
+      );
+      setDescription('');
+      setType('personal');
+      setAllDay(false);
     }
-  }, [event, isOpen])
+  }, [event, isOpen]);
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   const handleSubmit = () => {
     const newEventData: MyCalendarEventType = {
@@ -100,15 +111,14 @@ const EventModal: React.FC<EventModalProps> = ({
       description,
       type,
       allDay
-      // courseId and userId would need to be set if applicable, perhaps via more fields in modal
-    }
-    onSave(newEventData)
-    onClose()
-  }
+    };
+    onSave(newEventData);
+    onClose();
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-      <div className="bg-card p-6 rounded-lg shadow-xl w-full max-w-md">
+      <div className="bg-background p-6 rounded-lg border shadow-xl w-full max-w-md">
         <h2 className="text-2xl font-semibold mb-4">
           {isNew ? 'Add New Event' : 'Edit Event'}
         </h2>
@@ -116,7 +126,7 @@ const EventModal: React.FC<EventModalProps> = ({
           <div>
             <label
               htmlFor="title"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-muted-foreground"
             >
               Title
             </label>
@@ -131,7 +141,7 @@ const EventModal: React.FC<EventModalProps> = ({
           <div>
             <label
               htmlFor="start"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-muted-foreground"
             >
               Start
             </label>
@@ -140,14 +150,14 @@ const EventModal: React.FC<EventModalProps> = ({
               id="start"
               value={start}
               onChange={(e) => setStart(e.target.value)}
-              className="mt-1 block w-full border  rounded-md shadow-sm p-2"
+              className="mt-1 block w-full border rounded-md shadow-sm p-2"
               disabled={allDay}
             />
           </div>
           <div>
             <label
               htmlFor="end"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-muted-foreground"
             >
               End
             </label>
@@ -156,7 +166,7 @@ const EventModal: React.FC<EventModalProps> = ({
               id="end"
               value={end}
               onChange={(e) => setEnd(e.target.value)}
-              className="mt-1 block w-full border  rounded-md shadow-sm p-2"
+              className="mt-1 block w-full border rounded-md shadow-sm p-2"
               disabled={allDay}
             />
           </div>
@@ -166,7 +176,7 @@ const EventModal: React.FC<EventModalProps> = ({
               id="allDay"
               checked={allDay}
               onChange={(e) => setAllDay(e.target.checked)}
-              className="size-4 text-blue-600  rounded"
+              className="size-4 text-blue-600 rounded"
             />
             <label
               htmlFor="allDay"
@@ -178,7 +188,7 @@ const EventModal: React.FC<EventModalProps> = ({
           <div>
             <label
               htmlFor="type"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-muted-foreground"
             >
               Type
             </label>
@@ -188,7 +198,7 @@ const EventModal: React.FC<EventModalProps> = ({
               onChange={(e) =>
                 setType(e.target.value as MyCalendarEventType['type'])
               }
-              className="mt-1 block w-full border  rounded-md shadow-sm p-2"
+              className="mt-1 block w-full border rounded-md shadow-sm p-2"
             >
               <option value="personal">Personal</option>
               <option value="live-class">Live Class</option>
@@ -201,7 +211,7 @@ const EventModal: React.FC<EventModalProps> = ({
           <div>
             <label
               htmlFor="description"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-muted-foreground"
             >
               Description (Optional)
             </label>
@@ -210,7 +220,7 @@ const EventModal: React.FC<EventModalProps> = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
-              className="mt-1 block w-full border  rounded-md shadow-sm p-2"
+              className="mt-1 block w-full border rounded-md shadow-sm p-2"
             ></textarea>
           </div>
         </div>
@@ -222,113 +232,115 @@ const EventModal: React.FC<EventModalProps> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export function CalendarPage() {
-  const { user: authUser } = useAuth()
-  const [events, setEvents] = useState<MyCalendarEventType[]>([])
-  const [selectedEvent, setSelectedEvent] =
-    useState<MyCalendarEventType | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isNewEvent, setIsNewEvent] = useState(false)
-  const [currentView, setCurrentView] = useState<View>('month')
+  const { user: authUser } = useAuth();
+  const [events, setEvents] = useState<MyCalendarEventType[]>([]);
+  const [selectedEvent, setSelectedEvent] = useState<MyCalendarEventType | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isNewEvent, setIsNewEvent] = useState(false);
+  const [currentView, setCurrentView] = useState<View>('month');
 
   useEffect(() => {
-    // Filter events for the logged-in user or show all public/course events
-    // This is a simplified example; a real app would have more complex logic
     if (authUser) {
       const userEvents = mockCalendarEvents.filter(
         (event) =>
-          event.userId === authUser.id || // Events specific to the user
-          !event.userId || // Public events or general course events not tied to a specific user for creation
+          event.userId === authUser.id ||
+          !event.userId ||
           event.type === 'live-class' ||
-          event.type === 'assignment-due' // Show all academic events for now
-      )
-      setEvents(userEvents)
+          event.type === 'assignment-due'
+      );
+      setEvents(userEvents);
     } else {
-      // Show only public events if no user is logged in (e.g., holidays)
       setEvents(
         mockCalendarEvents.filter(
           (event) => !event.userId && event.type === 'holiday'
         )
-      )
+      );
     }
-  }, [authUser])
+  }, [authUser]);
 
-  const handleSelectEvent = (event: MyCalendarEventType) => {
-    setSelectedEvent(event)
-    setIsNewEvent(false)
-    setIsModalOpen(true)
-  }
+  // 转换事件数据为Calendar组件期望的格式
+  const calendarEvents: CalendarEventData[] = events.map((event) => ({
+    id: event.id,
+    title: event.title,
+    start: new Date(event.start),
+    end: new Date(event.end),
+    allDay: event.allDay,
+    description: event.description,
+    type: event.type
+  }));
+
+  const handleSelectEvent = (calendarEvent: CalendarEventData) => {
+    // 找到原始事件数据
+    const originalEvent = events.find(e => e.id === calendarEvent.id);
+    if (originalEvent) {
+      setSelectedEvent(originalEvent);
+      setIsNewEvent(false);
+      setIsModalOpen(true);
+    }
+  };
 
   const handleSelectSlot = (slotInfo: {
-    start: Date
-    end: Date
-    action: 'select' | 'click' | 'doubleClick'
+    start: Date;
+    end: Date;
+    action: 'select' | 'click' | 'doubleClick';
   }) => {
     if (slotInfo.action === 'doubleClick' || slotInfo.action === 'select') {
       setSelectedEvent({
-        id: ``, // Will be generated on save
+        id: '',
         title: '',
         start: slotInfo.start.toISOString(),
         end: slotInfo.end.toISOString(),
         type: 'personal'
-      })
-      setIsNewEvent(true)
-      setIsModalOpen(true)
+      });
+      setIsNewEvent(true);
+      setIsModalOpen(true);
     }
-  }
+  };
 
   const closeModal = () => {
-    setIsModalOpen(false)
-    setSelectedEvent(null)
-  }
+    setIsModalOpen(false);
+    setSelectedEvent(null);
+  };
 
   const saveEvent = (eventData: MyCalendarEventType) => {
     if (isNewEvent) {
       setEvents((prevEvents) => [
         ...prevEvents,
         { ...eventData, id: `evt-${Date.now()}-${Math.random()}` }
-      ])
+      ]);
     } else {
       setEvents((prevEvents) =>
         prevEvents.map((ev) => (ev.id === eventData.id ? eventData : ev))
-      )
+      );
     }
-    // In a real app, you would also send this to a backend API
-  }
+  };
 
-  const eventStyleGetter = (event: MyCalendarEventType) => {
+  const eventStyleGetter = (event: CalendarEventData) => {
     const style = {
       backgroundColor:
-        event.color ||
-        (event.type === 'live-class'
+        event.type === 'live-class'
           ? '#3174ad'
           : event.type === 'assignment-due'
           ? '#ff9f89'
-          : '#4caf50'),
+          : '#4caf50',
       borderRadius: '5px',
       opacity: 0.8,
       color: 'white',
       border: '0px',
       display: 'block'
-    }
-    return {
-      style: style
-    }
-  }
-
-  if (!authUser && currentView !== 'month') {
-    // Limit views if not logged in, or handle differently
-    // Optionally, redirect to login or show a restricted view
-  }
+    };
+    return { style };
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-6 flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold ">Calendar</h1>
+          <h1 className="text-3xl font-bold">Calendar</h1>
           <p className="text-md text-muted-foreground">
             Manage your schedule, deadlines, and important events.
           </p>
@@ -336,9 +348,9 @@ export function CalendarPage() {
         {authUser && (
           <Button
             onClick={() => {
-              setSelectedEvent(null)
-              setIsNewEvent(true)
-              setIsModalOpen(true)
+              setSelectedEvent(null);
+              setIsNewEvent(true);
+              setIsModalOpen(true);
             }}
           >
             <PlusCircle className="mr-2 size-5" /> Add Event
@@ -363,11 +375,7 @@ export function CalendarPage() {
       <div className="p-2 sm:p-4 rounded-lg shadow h-[70vh] min-h-[600px]">
         <Calendar
           localizer={localizer}
-          events={events.map((e) => ({
-            ...e,
-            start: new Date(e.start),
-            end: new Date(e.end)
-          }))}
+          events={calendarEvents}
           startAccessor="start"
           endAccessor="end"
           style={{ height: '100%' }}
@@ -377,11 +385,9 @@ export function CalendarPage() {
           eventPropGetter={eventStyleGetter}
           view={currentView}
           onView={(view: View) => setCurrentView(view)}
-          // components={{
-          //   event: CustomEventComponent // Optional: for highly custom event rendering
-          // }}
         />
       </div>
+      
       <EventModal
         event={selectedEvent}
         isOpen={isModalOpen}
@@ -390,13 +396,5 @@ export function CalendarPage() {
         isNew={isNewEvent}
       />
     </div>
-  )
+  );
 }
-
-// Optional Custom Event Component Example
-// const CustomEventComponent: React.FC<EventProps<MyCalendarEventType>> = ({ event }) => (
-//   <div title={event.description} className="p-1">
-//     <strong>{event.title}</strong>
-//     {event.description && <p className="text-xs truncate">{event.description}</p>}
-//   </div>
-// ); 
