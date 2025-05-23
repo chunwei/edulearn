@@ -33,6 +33,7 @@ import { ExamsListPage } from './pages/student/ExamsListPage'
 import { ExamResultsPage } from './pages/student/ExamResultsPage'
 import { InstructorExamGradePage } from './pages/instructor/InstructorExamGradePage'
 import { InstructorExamsListPage } from './pages/instructor/InstructorExamsListPage'
+import { ExamCreator } from './pages/instructor/ExamCreator'
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   // 使用新的 hook
@@ -207,6 +208,14 @@ function AppContent() {
           element={
             <ProtectedRoute>
               <InstructorExamsListPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/instructor/exams/create"
+          element={
+            <ProtectedRoute>
+              <ExamCreator />
             </ProtectedRoute>
           }
         />
