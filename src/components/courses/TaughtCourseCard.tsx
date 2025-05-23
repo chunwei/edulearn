@@ -25,7 +25,7 @@ const TaughtCourseCard: React.FC<TaughtCourseCardProps> = ({ course }) => {
   };
 
   return (
-    <div className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full bg-white">
+    <div className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full bg-card">
       <Link to={`/courses/${course.id}`} className="block">
         <img
           src={
@@ -37,24 +37,24 @@ const TaughtCourseCard: React.FC<TaughtCourseCardProps> = ({ course }) => {
         />
         <div className="p-4">
           <h3
-            className="text-lg font-semibold text-gray-800 mb-1 truncate h-[2em] leading-tight"
+            className="text-lg font-semibold mb-1 truncate h-[2em] leading-tight"
             title={course.title}
           >
             {course.title}
           </h3>
-          <p className="text-sm text-gray-500 mb-1">
+          <p className="text-sm text-muted-foreground mb-1">
             Category: {course.category}
           </p>
-          <p className="text-sm text-gray-500 mb-2">
+          <p className="text-sm text-muted-foreground mb-2">
             Level:{' '}
             {course.level.charAt(0).toUpperCase() + course.level.slice(1)}
           </p>
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-muted-foreground">
             {course.duration} &bull; {course.enrollmentCount} students enrolled
           </div>
         </div>
       </Link>
-      <div className="p-3 border-t mt-auto bg-gray-50 grid grid-cols-3 gap-2">
+      <div className="p-3 border-t mt-auto grid grid-cols-3 gap-2">
         <Button
           variant="outline"
           size="sm"
